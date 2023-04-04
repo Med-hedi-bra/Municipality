@@ -1,0 +1,139 @@
+<div class="navbar-area">
+  <div class="main-responsive-nav">
+   
+
+    <!-- navbar for mobile devices -->
+    <nav id="responsive" class="navbar navbar-expand-lg navbar-light bg-light">
+      <a routerLink="/home" class="logo ml-3"><img src="assets/images/small-logo.png" alt="logo" /></a>
+      <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto pl-3">
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu mr-5" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0 pl-3">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            Search
+          </button>
+        </form>
+        
+        <div *ngIf="displayLogout()==false" class="d-flex justify-content-around w-25 ml-4 mt-3" style="list-style: none">
+          <li>
+            <a class="default-button" routerLink="/login">Login</a>
+          </li> 
+
+          <li class="ml-1 mr-3">
+            <a class="default-button" routerLink="/register">Register</a>
+          </li>
+        </div>
+        
+          <div *ngIf="displayLogout()==true" class="d-flex justify-content-around w-25 ml-4 mt-3" style="list-style: none">
+            <li>
+              <a class="default-button" style="color: white;" (click)="handleLogout()">Logout</a>
+            </li> 
+            <li *ngIf="displayAdmin()">
+              <a class="default-button" style="color: white;" routerLink="/admin">Espace Admin </a>
+            </li> 
+   
+          </div> 
+         
+      </div>
+    </nav>
+
+    <!--End  navbar for mobile devices -->
+  </div>
+  <!-- navbar for desktop -->
+  <div class="main-nav">
+    <div class="container">
+      <nav class="navbar navbar-expand-md navbar-light">
+        <a class="navbar-brand" routerLink="/home">
+          <img src="assets/images/logo.png" alt="logo" />
+        </a>
+        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-5">
+            <li class="nav-item">
+              <a routerLink="/home" class="nav-link active">Acceuil</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link dropdown-toggle">Projects</a>
+              <ul class="dropdown-menu">
+                <li class="nav-item">
+                  <a href="projects.html" class="nav-link">Our Projects</a>
+                </li>
+                <li class="nav-item">
+                  <a href="project-details.html" class="nav-link">Project Details</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link dropdown-toggle">Services</a>
+              <ul class="dropdown-menu">
+                <li class="nav-item">
+                  <a href="services.html" class="nav-link">Our Services</a>
+                </li>
+                <li class="nav-item">
+                  <a href="service-details.html" class="nav-link">Service Details</a>
+                </li>
+              </ul>
+            </li>
+           
+            <li class="nav-item">
+              <a href="contact.html" class="nav-link">Contact Us</a>
+            </li>
+          </ul>
+          <div class="menu-sidebar">
+            <ul>
+              <li>
+                <button class="popup-button">
+                  <i class="fas fa-search"></i>
+                </button>
+              </li>
+              <div *ngIf="displayLogout()==false">
+                <li>
+                  <a class="default-button" routerLink="/login">Login</a>
+                </li>
+                <li>
+                  <a class="default-button" routerLink="/register">Register</a>
+                </li>
+              </div>
+              <div *ngIf="displayLogout()==true" class="d-flex justify-content-around w-25 ml-4 mt-3" style="list-style: none">
+                <li>
+                  <a class="default-button" style="color: white;" (click)="handleLogout()">Logout</a>
+                </li> 
+                <li *ngIf="displayAdmin()">
+                  <a class="default-button" style="color: white;" routerLink="/admin">Espace Admin </a>
+                </li> 
+       
+              </div> 
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <!--End navbar for desktop -->
+</div>

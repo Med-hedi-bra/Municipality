@@ -1,0 +1,98 @@
+<app-navbar></app-navbar>
+
+<div class="login pt-70 pb-100">
+  <div class="container">
+    <div class="row">
+      <section class="uni-banner">
+        <div class="container">
+          <div class="uni-banner-text-area">
+            <h1>Login</h1>
+            <ul>
+              <li><a routerLink="home">Acceuil</a></li>
+              <li>Login</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="col-lg-6 col-md-12 offset-md-3 col-sm-12 col-12">
+        <div class="log-in-card">
+          <div class="default-section-title">
+            <h3>Log In To Your Account</h3>
+          </div>
+          <div class="login-form pr-20">
+            <!-- bad credntiels  -->
+            <div *ngIf="errorMsg" class="alert alert-danger" role="alert">
+              {{ errorMsg }}
+            </div>
+            <!-- end bad credntiels  -->
+            <form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
+              <div class="mb-3">
+                <input
+                  formControlName="cin"
+                  type="email"
+                  class="form-control"
+                  placeholder="Enter your CIN"
+                  aria-describedby="emailHelp"
+                  required
+                />
+                <small
+                  *ngIf="
+                    loginForm.controls['cin'].errors &&
+                    loginForm.controls['cin'].touched
+                  "
+                  class="text-danger"
+                >
+                  {{ getErrorMessage("CIN", loginForm.controls["cin"].errors) }}
+                </small>
+              </div>
+              <div class="mb-3">
+                <input
+                  formControlName="password"
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  required
+                />
+                <small
+                  *ngIf="
+                    loginForm.controls['password'].errors &&
+                    loginForm.controls['password'].touched
+                  "
+                  class="text-danger"
+                >
+                  {{
+                    getErrorMessage(
+                      "PASSWORD",
+                      loginForm.controls["password"].errors
+                    )
+                  }}
+                </small>
+              </div>
+              <div class="mb-3 form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="exampleCheck1"
+                />
+                <label class="form-check-label" for="exampleCheck1"
+                  >Remember Me</label
+                >
+              </div>
+              <button
+                [disabled]="loginForm.invalid"
+                type="submit"
+                class="default-button"
+              >
+                Log In
+                <i class="fas fa-angle-right"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
