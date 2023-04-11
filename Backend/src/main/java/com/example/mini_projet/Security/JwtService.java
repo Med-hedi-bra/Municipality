@@ -146,29 +146,29 @@ public class JwtService {
 
     // These Methods Are used To Create A cookie that Stores the Token Value
 
-    public ResponseCookie generateJwtCookie(UserDetails userPrincipal) {
-        String jwt = generateToken(userPrincipal);
-        ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();
-        return cookie;
-    }
-    //Generate A HttpOnly cookie that contains the jwt token
-
-
-    public ResponseCookie getCleanJwtCookie()
-    {
-        ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/api").build();
-        return cookie;
-    }
-
-    public String getJwtFromCookies(HttpServletRequest request)
-    {
-        Cookie cookie = WebUtils.getCookie(request, jwtCookie);
-        if (cookie != null) {
-            return cookie.getValue();
-        } else {
-            return null;
-        }
-    }
+//    public ResponseCookie generateJwtCookie(UserDetails userPrincipal) {
+//        String jwt = generateToken(userPrincipal);
+//        ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();
+//        return cookie;
+//    }
+//    //Generate A HttpOnly cookie that contains the jwt token
+//
+//
+//    public ResponseCookie getCleanJwtCookie()
+//    {
+//        ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/api").build();
+//        return cookie;
+//    }
+//
+//    public String getJwtFromCookies(HttpServletRequest request)
+//    {
+//        Cookie cookie = WebUtils.getCookie(request, jwtCookie);
+//        if (cookie != null) {
+//            return cookie.getValue();
+//        } else {
+//            return null;
+//        }
+//    }
 
 
 

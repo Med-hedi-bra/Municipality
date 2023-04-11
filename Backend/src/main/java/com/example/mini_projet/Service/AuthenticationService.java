@@ -8,6 +8,7 @@ import com.example.mini_projet.Dto.RegisterResponse;
 import com.example.mini_projet.Repositories.TokenRepository;
 import com.example.mini_projet.Repositories.UserRepository;
 import com.example.mini_projet.Security.JwtService;
+import com.example.mini_projet.models.Role;
 import com.example.mini_projet.models.Token;
 import com.example.mini_projet.models.TokenType;
 import com.example.mini_projet.models.User;
@@ -34,10 +35,12 @@ public class AuthenticationService {
     {
 
         var user = User.builder()
+                .cin(request.getCin())
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
-                .cin(request.getCin())
-                .Role(request.getRole())
+                .gender(request.getGender())
+                .dateOfBirth(request.getDateOfBirth())
+                .Role(Role.USER)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
 
@@ -75,7 +78,7 @@ public class AuthenticationService {
         tokenRepository.save(token);
     }
     private void revokeAllUserTokens(User user) {
-        var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
+        var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getCin());
         if (validUserTokens.isEmpty())
             return;
         validUserTokens.forEach(token -> {

@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Data
 @Builder
@@ -17,20 +20,24 @@ public class RegisterRequest {
 
     @NotBlank
     @Size(max = 15)
-    private String firstname;
+    private String cin;
 
+
+    @NotBlank
+    @Size(max = 15)
+    private String firstname;
 
     @NotBlank
     @Size(max = 15)
     private String lastname;
 
-
     @NotBlank
-    @Size(max = 20)
+    @Size(max = 50)
+    private String gender;
 
-    private String cin;
 
-    private Role Role;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateOfBirth;
 
 
     @NotBlank
