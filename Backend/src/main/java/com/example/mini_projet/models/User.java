@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,8 +31,9 @@ public class User implements UserDetails {
     public static Token token;
 
     @Id
-    @GeneratedValue
-    private Integer id;
+    @NotBlank
+    @Size(max = 10)
+    private String cin;
 
     @NotBlank
     @Size(max = 50)
@@ -41,15 +43,22 @@ public class User implements UserDetails {
     @Size(max = 50)
     private String lastname;
 
+
     @NotBlank
-    @Size(max = 10)
-    private String cin;
+    @Size(max = 50)
+    private String gender;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateOfBirth;
 
     @NotBlank
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role Role;
+
+    @Transient
+    private boolean valid ;
 
 
 
