@@ -36,8 +36,8 @@ public class SecurityConfig {
                 .disable()
 
                 .authorizeHttpRequests()
-                .requestMatchers("/miniProjet/auth/**").permitAll()
-                //.requestMatchers("/miniProjet/test/**").hasAnyAuthority("ADMIN")
+                .requestMatchers("/**").permitAll()
+                //.requestMatchers("/miniProjet/user/**").permitAll()
 
 
                 .anyRequest()
