@@ -42,6 +42,7 @@ public class AuthenticationService {
                 .dateOfBirth(request.getDateOfBirth())
                 .Role(Role.USER)
                 .password(passwordEncoder.encode(request.getPassword()))
+                .valid(false)
                 .build();
 
 

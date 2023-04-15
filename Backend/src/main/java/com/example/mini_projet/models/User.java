@@ -57,13 +57,12 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role Role;
 
-    @Transient
+    @NotBlank
     private boolean valid ;
 
-
-
-
-
+    @ManyToOne
+    @JoinColumn(name = "id_mun")
+    private Municipality municipality;
 
 
 

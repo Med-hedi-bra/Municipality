@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/miniProjet/auth")
+@RequestMapping("/municipality/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
 

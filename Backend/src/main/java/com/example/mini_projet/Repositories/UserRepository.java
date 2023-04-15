@@ -14,4 +14,5 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     Optional<User> findByCin(String cin);
 
     List<User> findAll();
+
 }
