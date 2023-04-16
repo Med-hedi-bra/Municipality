@@ -1,7 +1,6 @@
 package com.example.mini_projet.Dto;
 
 
-import com.example.mini_projet.models.Role;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;

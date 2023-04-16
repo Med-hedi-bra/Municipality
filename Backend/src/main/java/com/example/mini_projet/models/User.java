@@ -1,22 +1,22 @@
 package com.example.mini_projet.models;
 
 import jakarta.persistence.*;
-
-import java.lang.reflect.Type;
-import java.util.*;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -55,7 +55,7 @@ public class User implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private Role Role;
+    private com.example.mini_projet.models.enums.Role Role;
 
     @NotBlank
     private boolean valid ;
@@ -63,6 +63,20 @@ public class User implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "id_mun")
     private Municipality municipality;
+
+    @OneToOne(targetEntity = ContentOfBirth.class , mappedBy = "user")
+    private ContentOfBirth contentOfBirth;
+
+
+    @OneToMany(targetEntity = Demande.class , mappedBy = "user")
+    private ArrayList<Demande> demandes = new ArrayList<>();
+
+
+
+
+
+
+
 
 
 

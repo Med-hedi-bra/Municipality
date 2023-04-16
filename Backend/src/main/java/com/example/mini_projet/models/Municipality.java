@@ -3,10 +3,12 @@ package com.example.mini_projet.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 @Data
 @Builder
@@ -33,4 +35,15 @@ public class Municipality {
 
     @OneToMany(mappedBy = "municipality")
     private ArrayList<User> users = new ArrayList<User>();
+
+
+    @OneToOne(targetEntity = Statistics.class)
+    @JoinColumn(name = "id_stat")
+    private Statistics statistics;
+
+
+    @OneToMany(targetEntity = Post.class , mappedBy = "municipality")
+    private ArrayList<Post> posts = new ArrayList<Post>();
+
+
 }
