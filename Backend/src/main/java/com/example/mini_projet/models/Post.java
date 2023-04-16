@@ -1,6 +1,7 @@
 package com.example.mini_projet.models;
 
 
+import com.example.mini_projet.models.enums.Post_Type;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -8,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,10 +33,11 @@ public class Post {
     @Size(min = 3)
     private String content;
 
-    @NotBlank
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private Post_Type type;
 
     @NotBlank
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date_added;
 
     @ManyToOne

@@ -3,7 +3,6 @@ package com.example.mini_projet.Controller;
 import com.example.mini_projet.Service.UserService;
 import com.example.mini_projet.models.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

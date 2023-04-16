@@ -1,5 +1,6 @@
 package com.example.mini_projet.models;
 
+import com.example.mini_projet.models.enums.TokenType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
