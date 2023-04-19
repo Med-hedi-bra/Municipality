@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @SpringBootApplication
-@RestController
+
 //@CrossOrigin(origins ="*")
 public class MiniProjetApplication {
 
@@ -16,9 +16,5 @@ public class MiniProjetApplication {
 		SpringApplication.run(MiniProjetApplication.class, args);
 	}
 
-	@GetMapping("/")
-	public String hello(){
-		return "hello wassef";
-	}
 
 }

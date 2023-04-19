@@ -38,7 +38,7 @@ public class SecurityConfig {
                 .disable()
 
                 .authorizeHttpRequests()
-                .requestMatchers("/municipality/user/**").permitAll()
+                .requestMatchers("/**").permitAll()
 
 
                 .anyRequest()
