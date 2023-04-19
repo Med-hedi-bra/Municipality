@@ -39,6 +39,7 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request)
     {
         AuthenticationResponse response = authenticationService.authenticate(request);
+        response.getToken();
 
 
         HttpHeaders headers = new HttpHeaders();

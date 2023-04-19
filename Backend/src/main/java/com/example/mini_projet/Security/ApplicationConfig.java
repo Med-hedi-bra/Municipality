@@ -30,7 +30,7 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> userRepository.findByCin(username)
+        return cin -> userRepository.findByCin(cin)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
     }
 
