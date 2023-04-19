@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class Municipality {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank
@@ -34,16 +33,15 @@ public class Municipality {
     private String president;
 
     @OneToMany(mappedBy = "municipality")
-    private ArrayList<User> users = new ArrayList<User>();
+    private ArrayList<User> users = new ArrayList<>();
 
 
-    @OneToOne(targetEntity = Statistics.class)
-    @JoinColumn(name = "id_stat")
+    @OneToOne(targetEntity = Statistics.class,mappedBy = "municipality")
     private Statistics statistics;
 
 
     @OneToMany(targetEntity = Post.class , mappedBy = "municipality")
-    private ArrayList<Post> posts = new ArrayList<Post>();
+    private ArrayList<Post> posts = new ArrayList<>();
 
 
 }

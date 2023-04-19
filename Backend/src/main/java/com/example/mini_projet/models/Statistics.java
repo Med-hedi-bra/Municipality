@@ -2,7 +2,6 @@ package com.example.mini_projet.models;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,8 +9,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Statistics {
 
@@ -19,19 +18,16 @@ public class Statistics {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank
-    private int population;
+    private Integer population;
 
-    @NotBlank
-    private int surface;
+    private Integer surface;
 
-    @NotBlank
-    private int age;
+    private Integer age;
 
-    @NotBlank
-    private int program;
+    private Integer program;
 
 
-    @OneToOne(targetEntity = Municipality.class , mappedBy = "statistics")
+    @OneToOne(targetEntity = Municipality.class )
+    @JoinColumn(name = "id_mun")
     private Municipality municipality;
 }
