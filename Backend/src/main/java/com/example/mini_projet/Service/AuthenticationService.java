@@ -8,9 +8,9 @@ import com.example.mini_projet.Dto.RegisterResponse;
 import com.example.mini_projet.Repositories.TokenRepository;
 import com.example.mini_projet.Repositories.UserRepository;
 import com.example.mini_projet.Security.JwtService;
-import com.example.mini_projet.models.Role;
+import com.example.mini_projet.models.enums.Role;
 import com.example.mini_projet.models.Token;
-import com.example.mini_projet.models.TokenType;
+import com.example.mini_projet.models.enums.TokenType;
 import com.example.mini_projet.models.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -42,6 +42,7 @@ public class AuthenticationService {
                 .dateOfBirth(request.getDateOfBirth())
                 .Role(Role.USER)
                 .password(passwordEncoder.encode(request.getPassword()))
+                .valid(false)
                 .build();
 
 

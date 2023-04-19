@@ -1,6 +1,7 @@
 package com.example.mini_projet.Controller;
 
 
+
 import com.example.mini_projet.Dto.AuthenticationRequest;
 import com.example.mini_projet.Dto.AuthenticationResponse;
 import com.example.mini_projet.Dto.RegisterRequest;
@@ -14,8 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/miniProjet/auth")
+@CrossOrigin(origins = "*")
+@RequestMapping("/municipality/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
