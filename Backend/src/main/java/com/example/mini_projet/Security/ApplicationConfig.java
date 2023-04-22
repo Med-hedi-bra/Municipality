@@ -20,8 +20,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
-@EnableGlobalMethodSecurity( //find solution
-        prePostEnabled = true)
+//@EnableGlobalMethodSecurity( //find solution
+//        prePostEnabled = true)
 public class ApplicationConfig {
 
     private final UserRepository userRepository;

@@ -56,9 +56,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             if (jwtService.isTokenValid(jwt, userDetails) && isTokenValidDouble)
             {
-                Claims claims = jwtService.extractRole(jwt);
-                System.out.println("=========================");
-                System.out.println(claims);
+
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);

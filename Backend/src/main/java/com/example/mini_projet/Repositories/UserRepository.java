@@ -2,6 +2,7 @@ package com.example.mini_projet.Repositories;
 
 import com.example.mini_projet.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,7 +13,14 @@ public interface UserRepository extends JpaRepository<User,String> {
 
 
     Optional<User> findByCin(String cin);
-
     List<User> findAll();
+
+
+
+
+    //List<User> getUsersBy
+
+    //@Query("SELECT u FROM  User u  WHERE u. = ?1")
+    //List<User> getUserByCodeMun(Long codeMun);
 
 }

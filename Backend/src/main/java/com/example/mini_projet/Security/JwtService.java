@@ -77,10 +77,10 @@ public class JwtService {
 
     }
 
-    public Claims extractRole(String token)
-    {
-        return extractAllClaims(token).get("authorities",Claims.class);
-    }
+//    public Claims extractRole(String token)
+//    {
+//        return extractAllClaims(token).get("authorities",Claims.class);
+//    }
 
 
 

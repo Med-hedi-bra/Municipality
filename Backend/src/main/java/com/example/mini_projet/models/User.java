@@ -1,31 +1,33 @@
 package com.example.mini_projet.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.io.Serializable;
+import java.util.*;
 
-@Data
+//@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Getter
+@Setter
 
 @Table(name = "user")
-public class User implements UserDetails {
+public class User implements UserDetails, Serializable {
 
     @Autowired
     public static Token token;
@@ -33,6 +35,7 @@ public class User implements UserDetails {
     @Id
     @NotBlank
     @Size(max = 10)
+    @Column(name="cin")
     private String cin;
 
     @NotBlank
@@ -55,21 +58,28 @@ public class User implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private com.example.mini_projet.models.enums.Role Role;
+    private com.example.mini_projet.enums.Role Role;
 
-    @NotBlank
+
     private boolean valid ;
 
-    @ManyToOne
-    @JoinColumn(name = "id_mun")
+
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "code_mun")
+    @JsonSerialize
+    //@JsonBackReference
     private Municipality municipality;
 
-    @OneToOne(targetEntity = ContentOfBirth.class , mappedBy = "user")
-    private ContentOfBirth contentOfBirth;
-
-
-    @OneToMany(targetEntity = Demande.class , mappedBy = "user")
-    private ArrayList<Demande> demandes = new ArrayList<>();
+    public Long getMunicipality() {
+        return municipality.getCodeMun();
+    }
+    //    @OneToOne(targetEntity = ContentOfBirth.class , mappedBy = "user")
+//    private ContentOfBirth contentOfBirth;
+//
+//
+//    @OneToMany(targetEntity = Demande.class , mappedBy = "user")
+//    private Set<Demande> demandes = new HashSet<>();
 
 
 

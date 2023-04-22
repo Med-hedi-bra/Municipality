@@ -1,30 +1,37 @@
 package com.example.mini_projet.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.boot.jackson.JsonComponent;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
-@Data
+//@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@JsonSerializableSchema
 
-
+@Getter
+@Setter
 @Table(name = "municipality")
-public class Municipality {
+public class Municipality implements Serializable {
+
+
     @Id
-    @NotBlank
-    @Size(max = 10)
-    private String codeMun;
+    @Column(name="code_mun")
+    private Long codeMun;
 
 
     @NotBlank
@@ -42,5 +49,19 @@ public class Municipality {
     @NotBlank
     @Size(max = 50)
     private String adjoint;
+
+
+    //@JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "municipality")
+    private Set<User> users = new HashSet<>();
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void addUser(User user) {
+        users.add(user);
+    }
+// pas besoin de la relation bidirectionnelle
 
 }
