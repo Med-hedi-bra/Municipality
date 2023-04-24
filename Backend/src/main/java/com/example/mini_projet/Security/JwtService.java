@@ -6,23 +6,23 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 
-import org.springframework.http.ResponseCookie;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.WebUtils;
 
 import java.security.Key;
 import java.util.*;
 import java.util.function.Function;
 
+import static java.util.Arrays.stream;
+
 @Service
 public class JwtService {
 
-    private static final String jwtCookie = "miniProjet_Cookie";
-    private static final String secretKey = "cd+Pr1js+w2qfT2BoCD+tPcYp9LbjpmhSMEJqUob1mcxZ7+Wmik4AYdjX+DlDjmE4yporzQ9tm7v3z/j+QbdYg==   §";
+    private static final String secretKey = "cd+Pr1js+w2qfT2BoCD+tPcYp9LbjpmhSMEJqUob1mcxZ7+Wmik4AYdjX+DlDjmE4yporzQ9tm7v3z/j+QbdYg==§";
+
 
 
     // extract username from jwt Token
@@ -61,7 +61,9 @@ public class JwtService {
     // from granted authorities collection
     public String roleToClaim(UserDetails userDetails)
     {
-        List authorities = (List) userDetails.getAuthorities();
+        var authorities =  userDetails.getAuthorities();
+
+
         var role = "";
         if (!authorities.isEmpty())
         {
@@ -75,6 +77,16 @@ public class JwtService {
 
     }
 
+//    public Claims extractRole(String token)
+//    {
+//        return extractAllClaims(token).get("authorities",Claims.class);
+//    }
+
+
+
+
+
+
 
     //Generate The JWT Token, We can set Extra Claims(Informations) in a map function
     public String generateToken(Map<String, Object> extraClaims,
@@ -82,17 +94,16 @@ public class JwtService {
     {
 
         var role = roleToClaim(userDetails);
+
         //var roles = Map.of("role",role);
 
         return Jwts
                 .builder()
                 .setHeaderParam("typ","JWT")
-                .claim("role",role)
-                .claim("cin",userDetails.getUsername())
-                //.claim("password",userDetails.getPassword())
-                //.setClaims(roles)
-                //.setSubject(userDetails.getUsername())
-                //.claim("userName",userDetails.getUsername())
+                //.claim("roles","ADMIN")
+                //.claim("cin",userDetails.getUsername())
+                .setSubject(userDetails.getUsername())
+                .claim("authorities", role)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
@@ -108,7 +119,7 @@ public class JwtService {
                                 UserDetails userDetails)
     {
         final String username = extractUserName(token);
-        return (username.equals(userDetails.getUsername())) & !isTokenExpired(token) ;
+        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token) ;
     }
 
 
@@ -140,6 +151,8 @@ public class JwtService {
                 .parseClaimsJws(token)
                 .getBody();
     }
+
+
 
 
 

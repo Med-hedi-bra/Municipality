@@ -1,47 +1,67 @@
 package com.example.mini_projet.models;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.boot.jackson.JsonComponent;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-@Data
+
+//@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@JsonSerializableSchema
+
+@Getter
+@Setter
 @Table(name = "municipality")
-public class Municipality {
+public class Municipality implements Serializable {
+
 
     @Id
-    private Long id;
+    @Column(name="code_mun")
+    private Long codeMun;
+
 
     @NotBlank
-    @Size(min = 3)
-    private String secritaire;
+    @Size(max = 50)
+    private String secretaire;
 
     @NotBlank
-    @Size(min = 3)
-    private String Maitre;
+    @Size(max = 50)
+    private String maire;
+
     @NotBlank
-    @Size(min = 3)
+    @Size(max = 50)
     private String president;
 
-    @OneToMany(mappedBy = "municipality")
-    private ArrayList<User> users = new ArrayList<>();
+    @NotBlank
+    @Size(max = 50)
+    private String adjoint;
 
 
-    @OneToOne(targetEntity = Statistics.class,mappedBy = "municipality")
-    private Statistics statistics;
+    //@JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "municipality")
+    private Set<User> users = new HashSet<>();
 
+    public Set<User> getUsers() {
+        return users;
+    }
 
-    @OneToMany(targetEntity = Post.class , mappedBy = "municipality")
-    private ArrayList<Post> posts = new ArrayList<>();
-
+    public void addUser(User user) {
+        users.add(user);
+    }
+// pas besoin de la relation bidirectionnelle
 
 }

@@ -1,6 +1,7 @@
 package com.example.mini_projet.Controller;
 
 import com.example.mini_projet.Service.UserService;
+import com.example.mini_projet.models.Municipality;
 import com.example.mini_projet.models.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,12 @@ public class UserController {
     @GetMapping("/")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
+    }
+
+    @GetMapping(path = "/{codeMun}")
+    public List<User> getUsersByCodeMun(@PathVariable("codeMun") Long codeMun){
+        return userService.getUsersByCodeMun(codeMun);
+
     }
 
     @PutMapping("/update/{cin}")

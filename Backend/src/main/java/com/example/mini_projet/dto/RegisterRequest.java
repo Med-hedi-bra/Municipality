@@ -1,4 +1,4 @@
-package com.example.mini_projet.Dto;
+package com.example.mini_projet.dto;
 
 
 import jakarta.validation.constraints.NotBlank;
@@ -38,9 +38,11 @@ public class RegisterRequest {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
-
     @NotBlank
     private String password;
+
+    @NotBlank
+    private Long codeMun;
 
 
 

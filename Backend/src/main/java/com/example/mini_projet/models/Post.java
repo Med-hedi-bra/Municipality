@@ -1,7 +1,7 @@
 package com.example.mini_projet.models;
 
 
-import com.example.mini_projet.models.enums.Post_Type;
+import com.example.mini_projet.enums.Post_Type;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

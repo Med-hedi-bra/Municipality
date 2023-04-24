@@ -1,6 +1,6 @@
 package com.example.mini_projet.models;
 
-import com.example.mini_projet.models.enums.TokenType;
+import com.example.mini_projet.enums.TokenType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -36,6 +36,6 @@ public class Token {
     public boolean expired;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "cin")
     public User user;
 }
