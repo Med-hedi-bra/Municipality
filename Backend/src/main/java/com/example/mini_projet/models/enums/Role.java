@@ -1,4 +1,4 @@
-package com.example.mini_projet.enums;
+package com.example.mini_projet.models.enums;
 
 public enum Role {
     ADMIN,
