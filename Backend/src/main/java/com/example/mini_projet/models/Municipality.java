@@ -1,5 +1,6 @@
 package com.example.mini_projet.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -8,7 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 public class Municipality {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank
@@ -27,21 +29,28 @@ public class Municipality {
 
     @NotBlank
     @Size(min = 3)
-    private String Maitre;
+    private String maitre;
     @NotBlank
     @Size(min = 3)
     private String president;
 
-    @OneToMany(mappedBy = "municipality")
-    private ArrayList<User> users = new ArrayList<>();
+//    @OneToMany(mappedBy = "municipality" ,fetch = FetchType.LAZY)
+//    private List<User> users ;
 
 
-    @OneToOne(targetEntity = Statistics.class,mappedBy = "municipality")
-    private Statistics statistics;
+//    @OneToOne(targetEntity = Statistics.class,mappedBy = "municipality" , fetch = FetchType.EAGER)
+//    private Statistics statistics;
 
 
-    @OneToMany(targetEntity = Post.class , mappedBy = "municipality")
-    private ArrayList<Post> posts = new ArrayList<>();
+    @OneToMany(targetEntity = Post.class , mappedBy = "municipality" ,fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Post> posts;
 
 
+    public void addPost(Post p) {
+        posts.add(p);
+    }
+    public  List<Post> getPosts(){
+        return posts;
+    }
 }

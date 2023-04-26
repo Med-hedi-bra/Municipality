@@ -27,7 +27,7 @@ public class Statistics {
     private Integer program;
 
 
-    @OneToOne(targetEntity = Municipality.class )
-    @JoinColumn(name = "id_mun")
-    private Municipality municipality;
+//    @OneToOne(targetEntity = Municipality.class )
+//    @JoinColumn(name = "id_mun")
+//    private Municipality municipality;
 }

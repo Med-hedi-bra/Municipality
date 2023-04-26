@@ -25,7 +25,7 @@ public class Image {
     private Blob file;
 
 
-    @ManyToOne(targetEntity = Post.class)
-    @JoinColumn(name = "id_post")
-    private Post post;
+//    @ManyToOne(targetEntity = Post.class)
+//    @JoinColumn(name = "id_post")
+//    private Post post;
 }

@@ -2,12 +2,9 @@ package com.example.mini_projet.Service;
 
 import com.example.mini_projet.Repositories.UserRepository;
 import com.example.mini_projet.models.User;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Date;
 import java.util.List;

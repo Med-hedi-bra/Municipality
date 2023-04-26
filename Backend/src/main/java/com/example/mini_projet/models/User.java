@@ -60,9 +60,9 @@ public class User implements UserDetails {
     @NotBlank
     private boolean valid ;
 
-    @ManyToOne
-    @JoinColumn(name = "id_mun")
-    private Municipality municipality;
+//    @ManyToOne
+//    @JoinColumn(name = "id_mun")
+//    private Municipality municipality;
 
     @OneToOne(targetEntity = ContentOfBirth.class , mappedBy = "user")
     private ContentOfBirth contentOfBirth;

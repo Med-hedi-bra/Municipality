@@ -2,8 +2,10 @@ package com.example.mini_projet.models;
 
 
 import com.example.mini_projet.models.enums.Post_Type;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +13,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -27,7 +28,7 @@ public class Post {
     private Long id;
 
     @NotBlank
-    private String Title;
+    private String title;
 
     @NotBlank
     @Size(min = 3)
@@ -36,16 +37,17 @@ public class Post {
     @Enumerated(EnumType.STRING)
     private Post_Type type;
 
-    @NotBlank
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date_added;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_Mun")
+    @JsonBackReference
     private Municipality municipality;
 
 
-    @OneToMany(targetEntity = Image.class , mappedBy = "post")
-    private ArrayList<Image> images = new ArrayList<Image>();
+//    @OneToMany(targetEntity = Image.class , mappedBy = "post")
+//    private ArrayList<Image> images = new ArrayList<>();
 
 }
