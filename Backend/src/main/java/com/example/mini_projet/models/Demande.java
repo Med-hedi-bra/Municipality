@@ -1,7 +1,7 @@
 package com.example.mini_projet.models;
 
-import com.example.mini_projet.models.enums.Demande_Type;
-import com.example.mini_projet.models.enums.State_Enum;
+import com.example.mini_projet.enums.Demande_Type;
+import com.example.mini_projet.enums.State_Enum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

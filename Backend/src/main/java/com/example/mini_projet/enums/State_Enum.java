@@ -1,4 +1,4 @@
-package com.example.mini_projet.models.enums;
+package com.example.mini_projet.enums;
 
 public enum State_Enum {
     Pending,

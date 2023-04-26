@@ -1,22 +1,26 @@
 package com.example.mini_projet.Service;
 
 
-import com.example.mini_projet.Dto.AuthenticationRequest;
-import com.example.mini_projet.Dto.AuthenticationResponse;
-import com.example.mini_projet.Dto.RegisterRequest;
-import com.example.mini_projet.Dto.RegisterResponse;
+import com.example.mini_projet.Repositories.MunicipalityRepository;
+import com.example.mini_projet.dto.AuthenticationRequest;
+import com.example.mini_projet.dto.AuthenticationResponse;
+import com.example.mini_projet.dto.RegisterRequest;
+import com.example.mini_projet.dto.RegisterResponse;
 import com.example.mini_projet.Repositories.TokenRepository;
 import com.example.mini_projet.Repositories.UserRepository;
 import com.example.mini_projet.Security.JwtService;
-import com.example.mini_projet.models.enums.Role;
+import com.example.mini_projet.enums.Role;
+import com.example.mini_projet.models.Municipality;
 import com.example.mini_projet.models.Token;
-import com.example.mini_projet.models.enums.TokenType;
+import com.example.mini_projet.enums.TokenType;
 import com.example.mini_projet.models.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 @Service
@@ -27,12 +31,19 @@ public class AuthenticationService {
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final MunicipalityService municipalityService;
     private final AuthenticationManager authenticationManager;
+    private final MunicipalityRepository municipalityRepository;
 
 
 
     public RegisterResponse register(RegisterRequest request)
     {
+        Municipality mun = municipalityRepository.findByCodeMuni(request.getCodeMun());
+        System.out.println("===============");
+        System.out.println(mun);
+
+
 
         var user = User.builder()
                 .cin(request.getCin())
@@ -43,13 +54,16 @@ public class AuthenticationService {
                 .Role(Role.USER)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .valid(false)
+                .municipality(mun)
                 .build();
+
 
 
 
         if (userRepository.findByCin(request.getCin()).isEmpty())
         {
             userRepository.save(user);
+            municipalityService.addUserToMunicipality(request.getCodeMun(), user.getCin());
             return RegisterResponse.builder()
                     .message("User Registered with Success")
                     .build();
