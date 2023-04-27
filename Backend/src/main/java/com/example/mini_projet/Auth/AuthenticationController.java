@@ -39,7 +39,7 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request)
     {
         AuthenticationResponse response = authenticationService.authenticate(request);
-
+        int aux;
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("AUTHORIZATION", "BEARER " + response.getToken());
