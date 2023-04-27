@@ -37,7 +37,8 @@ public class DemandeController {
         MessageResponse response;
         if(test){
             response = new MessageResponse("Demande added successfully");
-            return new ResponseEntity(response , HttpStatusCode.valueOf(201));
+            return ResponseEntity.status(201
+            ).body(response);
         }
         response = new MessageResponse("Failure to add Demande ");
         return new ResponseEntity(response , HttpStatusCode.valueOf(410));
