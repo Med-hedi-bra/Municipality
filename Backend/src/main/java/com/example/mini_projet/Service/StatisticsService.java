@@ -1,6 +1,7 @@
 package com.example.mini_projet.Service;
 
 import com.example.mini_projet.Repositories.StatisticsRepository;
+import com.example.mini_projet.models.Municipality;
 import com.example.mini_projet.models.Statistics;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class StatisticsService {
     final StatisticsRepository statisticsRepository;
+    final MunicipalityService municipalityService;
 
 
 
@@ -27,14 +29,20 @@ public class StatisticsService {
         else throw new IllegalStateException("Statisitics not exist");
     }
 
-    public boolean insert(Statistics s) {
+    public boolean insert(Statistics s , Long idMun) {
 
         try {
+            Municipality municipality= municipalityService.getById(idMun);
+            s.setMunicipality(municipality);
             statisticsRepository.save(s);
             return true;
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public Statistics getByIdMunicipality(Long id){
+        return statisticsRepository.getByMunicipalityId(id);
     }
 
     @Transactional
@@ -67,6 +75,18 @@ public class StatisticsService {
         if (statistics.isEmpty()) return false;
         statisticsRepository.deleteById(id);
         return true;
+    }
+
+    public boolean deleteAll(){
+        try {
+            statisticsRepository.deleteAll();
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+
+
     }
 
 

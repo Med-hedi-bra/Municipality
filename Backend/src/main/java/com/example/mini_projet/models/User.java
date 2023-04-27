@@ -1,7 +1,7 @@
 package com.example.mini_projet.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -31,33 +30,33 @@ public class User implements UserDetails {
     public static Token token;
 
     @Id
-    @NotBlank
+//    @NotBlank
     @Size(max = 10)
     private String cin;
 
-    @NotBlank
+//    @NotBlank
     @Size(max = 50)
     private String firstname;
 
-    @NotBlank
+//    @NotBlank
     @Size(max = 50)
     private String lastname;
 
 
-    @NotBlank
+//    @NotBlank
     @Size(max = 50)
     private String gender;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
-    @NotBlank
+//    @NotBlank
     private String password;
 
     @Enumerated(EnumType.STRING)
     private com.example.mini_projet.models.enums.Role Role;
 
-    @NotBlank
+//    @NotBlank
     private boolean valid ;
 
 //    @ManyToOne
@@ -69,7 +68,8 @@ public class User implements UserDetails {
 
 
     @OneToMany(targetEntity = Demande.class , mappedBy = "user")
-    private ArrayList<Demande> demandes = new ArrayList<>();
+    @JsonBackReference
+    private List<Demande> demandes;
 
 
 

@@ -38,8 +38,9 @@ public class Municipality {
 //    private List<User> users ;
 
 
-//    @OneToOne(targetEntity = Statistics.class,mappedBy = "municipality" , fetch = FetchType.EAGER)
-//    private Statistics statistics;
+    @OneToOne(targetEntity = Statistics.class,mappedBy = "municipality" , fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private Statistics statistics;
 
 
     @OneToMany(targetEntity = Post.class , mappedBy = "municipality" ,fetch = FetchType.LAZY)
@@ -47,10 +48,5 @@ public class Municipality {
     private List<Post> posts;
 
 
-    public void addPost(Post p) {
-        posts.add(p);
-    }
-    public  List<Post> getPosts(){
-        return posts;
-    }
+
 }

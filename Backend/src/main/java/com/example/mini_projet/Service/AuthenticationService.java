@@ -1,10 +1,10 @@
 package com.example.mini_projet.Service;
 
 
-import com.example.mini_projet.Dto.AuthenticationRequest;
-import com.example.mini_projet.Dto.AuthenticationResponse;
-import com.example.mini_projet.Dto.RegisterRequest;
-import com.example.mini_projet.Dto.RegisterResponse;
+import com.example.mini_projet.Dto.Request.AuthenticationRequest;
+import com.example.mini_projet.Dto.Response.AuthenticationResponse;
+import com.example.mini_projet.Dto.Request.RegisterRequest;
+import com.example.mini_projet.Dto.Response.RegisterResponse;
 import com.example.mini_projet.Repositories.TokenRepository;
 import com.example.mini_projet.Repositories.UserRepository;
 import com.example.mini_projet.Security.JwtService;
