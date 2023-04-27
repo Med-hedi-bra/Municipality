@@ -1,7 +1,7 @@
 package com.example.mini_projet.TEST;
 
 
-import com.example.mini_projet.Repositories.UserRepository;
+import com.example.mini_projet.User.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

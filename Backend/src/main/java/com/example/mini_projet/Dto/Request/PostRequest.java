@@ -1,6 +1,6 @@
 package com.example.mini_projet.Dto.Request;
 
-import com.example.mini_projet.models.enums.Post_Type;
+import com.example.mini_projet.Enums.Post_Type;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package com.example.mini_projet.Security;
 
-import com.example.mini_projet.Repositories.TokenRepository;
+import com.example.mini_projet.Auth.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

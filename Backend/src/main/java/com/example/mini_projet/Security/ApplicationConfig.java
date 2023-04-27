@@ -1,7 +1,7 @@
 package com.example.mini_projet.Security;
 
 
-import com.example.mini_projet.Repositories.UserRepository;
+import com.example.mini_projet.User.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
