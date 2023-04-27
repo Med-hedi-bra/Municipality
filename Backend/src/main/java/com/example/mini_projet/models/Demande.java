@@ -2,6 +2,8 @@ package com.example.mini_projet.models;
 
 import com.example.mini_projet.models.enums.Demande_Type;
 import com.example.mini_projet.models.enums.State_Enum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +27,7 @@ public class Demande {
     @Enumerated(EnumType.STRING)
     private Demande_Type type;
 
+    // this enum is not an enum in database is a string
     @Enumerated(EnumType.STRING)
     private  State_Enum state;
 
@@ -32,8 +35,10 @@ public class Demande {
     private Blob file;
 
 
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class ,fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "cin")
+    @JsonManagedReference
     private User user;
 
 

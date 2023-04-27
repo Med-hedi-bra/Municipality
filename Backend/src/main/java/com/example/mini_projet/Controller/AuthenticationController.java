@@ -2,10 +2,10 @@ package com.example.mini_projet.Controller;
 
 
 
-import com.example.mini_projet.dto.AuthenticationRequest;
-import com.example.mini_projet.dto.AuthenticationResponse;
-import com.example.mini_projet.dto.RegisterRequest;
-import com.example.mini_projet.dto.RegisterResponse;
+import com.example.mini_projet.Dto.Request.AuthenticationRequest;
+import com.example.mini_projet.Dto.Response.AuthenticationResponse;
+import com.example.mini_projet.Dto.Request.RegisterRequest;
+import com.example.mini_projet.Dto.Response.RegisterResponse;
 import com.example.mini_projet.Service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,6 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
 
-
     @PostMapping("/register")
     public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest request)
     {
@@ -41,7 +40,6 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request)
     {
         AuthenticationResponse response = authenticationService.authenticate(request);
-        //response.getToken();
 
 
         HttpHeaders headers = new HttpHeaders();

@@ -1,4 +1,4 @@
-package com.example.mini_projet.dto;
+package com.example.mini_projet.Dto.Response;
 
 
 import lombok.*;

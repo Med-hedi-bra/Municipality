@@ -1,4 +1,5 @@
-package com.example.mini_projet.dto;
+package com.example.mini_projet.Dto.Request;
+
 
 
 import jakarta.validation.constraints.NotBlank;

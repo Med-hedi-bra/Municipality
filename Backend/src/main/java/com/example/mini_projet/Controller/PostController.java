@@ -1,10 +1,12 @@
 package com.example.mini_projet.Controller;
 
-import com.example.mini_projet.Dto.PostRequest;
+import com.example.mini_projet.Dto.Request.PostRequest;
+import com.example.mini_projet.Dto.Response.MessageResponse;
 import com.example.mini_projet.Service.MunicipalityService;
 import com.example.mini_projet.Service.PostService;
 import com.example.mini_projet.models.Post;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,11 +36,15 @@ public class PostController {
     }
 
     @PostMapping("/add/municipality/{id}")
-    public ResponseEntity<String> addNewPost(@PathVariable("id") Long id_mun,@RequestBody Post p){
-
+    public ResponseEntity addNewPost(@PathVariable("id") Long id_mun, @RequestBody Post p){
+        MessageResponse response;
         boolean test = postService.insert(p , id_mun);
-        if(test) return ResponseEntity.status(201).body("Post added successfully");
-        return  ResponseEntity.status(405).body("Failure to add Post");
+        if(test){
+             response = new MessageResponse("Post added successfully");
+            return new ResponseEntity(response , HttpStatus.resolve(202));
+        }
+         response = new MessageResponse("Post added successfully");
+        return  new ResponseEntity(response , HttpStatus.resolve(404));
     }
 
 

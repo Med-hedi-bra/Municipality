@@ -1,6 +1,6 @@
 package com.example.mini_projet.Service;
 
-import com.example.mini_projet.Dto.PostRequest;
+import com.example.mini_projet.Dto.Request.PostRequest;
 import com.example.mini_projet.Repositories.PostRepository;
 import com.example.mini_projet.models.Municipality;
 import com.example.mini_projet.models.Post;
