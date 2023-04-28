@@ -4,6 +4,7 @@ import com.example.mini_projet.Demande.Demande;
 import com.example.mini_projet.ContentOfBirth.ContentOfBirth;
 import com.example.mini_projet.Auth.Token;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -67,7 +68,11 @@ public class User implements UserDetails {
 //    private Municipality municipality;
 
     @OneToOne(targetEntity = ContentOfBirth.class , mappedBy = "user")
+    @JsonManagedReference
     private ContentOfBirth contentOfBirth;
+
+
+
 
 
     @OneToMany(targetEntity = Demande.class , mappedBy = "user")
