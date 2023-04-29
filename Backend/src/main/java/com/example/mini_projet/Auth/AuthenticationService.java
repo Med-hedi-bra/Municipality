@@ -28,7 +28,6 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
 
-
     public RegisterResponse register(RegisterRequest request)
     {
 
