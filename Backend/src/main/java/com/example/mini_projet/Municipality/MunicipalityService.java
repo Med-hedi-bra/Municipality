@@ -1,5 +1,8 @@
 package com.example.mini_projet.Municipality;
 
+import com.example.mini_projet.User.User;
+import com.example.mini_projet.User.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MunicipalityService {
     final MunicipalityRepository municipalityRepository;
+    final UserRepository userRepository;
 
     public  Municipality getById(Long id) {
         Optional<Municipality> municipality = municipalityRepository.findById(id);
@@ -21,6 +25,8 @@ public class MunicipalityService {
         return  municipalityRepository.findAll();
     }
 
+
+
     public Municipality getByCodePostale(Long codePostale){
         Optional<Municipality> municipality= municipalityRepository.findById(codePostale);
         if(municipality.isPresent()) return municipality.get();
@@ -28,14 +34,27 @@ public class MunicipalityService {
     }
 
 
-    public boolean insert(Municipality municipality) {
-        try{
-            municipalityRepository.save(municipality);
-            return true;
+
+    public void addMunicipality(Municipality municipality)
+    {
+        Optional<Municipality> muni = municipalityRepository.findById(municipality.getId());
+        if (muni.isPresent()){
+            throw new IllegalStateException("la municipalite existe !");
         }
-        catch (Exception e){
-            return false;
-        }
+        municipalityRepository.save(municipality);
+    }
+
+
+    @Transactional
+    public Municipality addUserToMunicipality(
+            Long codeMun,
+            String cin){
+        User user = userRepository.findById(cin).get();
+        Municipality municipality = municipalityRepository.findById(codeMun).get();
+        user.setMunicipality(municipality);
+        municipality.addUser(user);
+        return municipalityRepository.save(municipality);
+
     }
 
 

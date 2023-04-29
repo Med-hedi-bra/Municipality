@@ -12,19 +12,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MunicipalityController {
     final MunicipalityService municipalityService;
+
+
     @GetMapping("/")
     public List<Municipality> getAll(){
         return municipalityService.getAll();
     }
+
+
+
     @GetMapping("/{id}")
     public Municipality getById(@PathVariable("id") Long id){
         return municipalityService.getById(id);
     }
-    @PostMapping("/")
-    public ResponseEntity<String> addNewMunicipality(@RequestBody Municipality municipality){
-        boolean test = municipalityService.insert(municipality);
-        if(test) return ResponseEntity.status(201).body("Municipality added successfully");
-        return ResponseEntity.status(402).body("Failure to add Municipality");
+
+
+
+    @PostMapping(path = "/add")
+    public void addNewMun(@RequestBody Municipality municipality){
+        municipalityService.addMunicipality(municipality);
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.mini_projet.User;
 import com.example.mini_projet.Demande.Demande;
 import com.example.mini_projet.ContentOfBirth.ContentOfBirth;
 import com.example.mini_projet.Auth.Token;
+import com.example.mini_projet.Municipality.Municipality;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -35,6 +36,7 @@ public class User implements UserDetails {
     @Id
 //    @NotBlank
     @Size(max = 10)
+    @Column(name="cin")
     private String cin;
 
 //    @NotBlank
@@ -62,9 +64,13 @@ public class User implements UserDetails {
 //    @NotBlank
     private boolean valid ;
 
-//    @ManyToOne
-//    @JoinColumn(name = "id_mun")
-//    private Municipality municipality;
+    @ManyToOne
+    @JoinColumn(name = "id_mun")
+    private Municipality municipality;
+
+    public Long getMunicipality() {
+        return municipality.getId();
+    }
 
     @OneToOne(targetEntity = ContentOfBirth.class , mappedBy = "user")
     private ContentOfBirth contentOfBirth;

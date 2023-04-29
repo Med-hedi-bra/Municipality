@@ -22,6 +22,12 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping(path = "/{codeMun}")
+    public List<User> getUsersByCodeMun(@PathVariable("codeMun") Long codeMun){
+        return userService.getUsersByCodeMun(codeMun);
+
+    }
+
     @PutMapping("/update/{cin}")
         public ResponseEntity<String> updateUser(
             @PathVariable(name = "cin") String cin,
