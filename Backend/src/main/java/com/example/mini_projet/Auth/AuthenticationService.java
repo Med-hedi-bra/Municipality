@@ -5,6 +5,8 @@ import com.example.mini_projet.Dto.Request.AuthenticationRequest;
 import com.example.mini_projet.Dto.Response.AuthenticationResponse;
 import com.example.mini_projet.Dto.Request.RegisterRequest;
 import com.example.mini_projet.Dto.Response.RegisterResponse;
+import com.example.mini_projet.Municipality.Municipality;
+import com.example.mini_projet.Municipality.MunicipalityRepository;
 import com.example.mini_projet.User.UserRepository;
 import com.example.mini_projet.Security.JwtService;
 import com.example.mini_projet.Enums.Role;
@@ -26,11 +28,15 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-
+    private final MunicipalityRepository municipalityRepository;
 
 
     public RegisterResponse register(RegisterRequest request)
     {
+
+        Municipality mun = municipalityRepository.findByCodeMuni(request.getCodeMun());
+        System.out.println("===============");
+        System.out.println(mun);
 
         var user = User.builder()
                 .cin(request.getCin())
@@ -41,6 +47,7 @@ public class AuthenticationService {
                 .Role(Role.USER)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .valid(false)
+                .municipality(mun)
                 .build();
 
 
