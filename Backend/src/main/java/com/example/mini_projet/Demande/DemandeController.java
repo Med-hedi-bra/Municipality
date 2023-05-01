@@ -20,6 +20,8 @@ public class DemandeController {
     public List<Demande> getAll(){
         return demandeService.getAll();
     }
+
+
     @GetMapping("/get/{id}")
     public Demande getById(@PathVariable("id") Long id){
         return demandeService.getById(id);
