@@ -72,7 +72,7 @@ public class User implements UserDetails {
     private Municipality municipality;
 
     public Long getMunicipality() {
-        return municipality.getId();
+        return municipality.getIdMun();
     }
 
     @OneToOne(targetEntity = ContentOfBirth.class , mappedBy = "user")

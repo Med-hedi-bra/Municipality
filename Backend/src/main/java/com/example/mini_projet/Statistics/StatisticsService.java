@@ -1,20 +1,25 @@
 package com.example.mini_projet.Statistics;
 
+import com.example.mini_projet.Municipality.MunicipalityRepository;
 import com.example.mini_projet.Municipality.MunicipalityService;
 import com.example.mini_projet.Municipality.Municipality;
+import com.example.mini_projet.Post.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class StatisticsService {
     final StatisticsRepository statisticsRepository;
     final MunicipalityService municipalityService;
+    final MunicipalityRepository municipalityRepository;
 
 
 
@@ -22,11 +27,14 @@ public class StatisticsService {
         return statisticsRepository.findAll();
     }
 
+
+
     public Statistics getById(Long id) {
         Optional<Statistics> statistics =  statisticsRepository.findById(id);
         if(statistics.isPresent())  return statistics.get();
         else throw new IllegalStateException("Statisitics not exist");
     }
+
 
     public boolean insert(Statistics s , Long idMun) {
 
@@ -40,8 +48,12 @@ public class StatisticsService {
         }
     }
 
-    public Statistics getByIdMunicipality(Long id){
-        return statisticsRepository.getByMunicipalityId(id);
+    public Optional<Statistics> getStatByIdMun(@PathVariable Long codeMun){
+        List<Statistics> stats = statisticsRepository.findAll();
+        Optional<Statistics> statByMun =
+                stats.stream().filter(stat -> stat.getMunicipality().equals(municipalityRepository.findById(codeMun).get()))
+                        .findFirst();
+        return statByMun;
     }
 
     @Transactional

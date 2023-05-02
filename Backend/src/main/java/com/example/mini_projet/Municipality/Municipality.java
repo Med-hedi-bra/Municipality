@@ -26,7 +26,8 @@ public class Municipality {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "id_mun")
+    private Long idMun;
 
     //@NotBlank
     @Size(min = 3)

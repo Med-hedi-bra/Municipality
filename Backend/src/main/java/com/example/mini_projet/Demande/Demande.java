@@ -19,10 +19,12 @@ import java.sql.Blob;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "demande")
 public class Demande {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_dem")
     private Long id;
 
     @Enumerated(EnumType.STRING)

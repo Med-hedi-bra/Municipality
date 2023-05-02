@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/statistics")
@@ -38,8 +39,8 @@ public class StatisticsController {
          return statisticsService.getById(id);
     }
      @GetMapping("get/municipality/{id}")
-     public Statistics getByMunicipalityId(@PathVariable("id") Long idMun){
-        return statisticsService.getByIdMunicipality(idMun);
+     public Optional<Statistics> getByMunicipalityId(@PathVariable("id") Long idMun){
+        return statisticsService.getStatByIdMun(idMun);
      }
 
 

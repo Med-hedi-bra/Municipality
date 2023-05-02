@@ -32,6 +32,7 @@ public class UserService {
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
+
     public User getByCin(String userCin){
         Optional<User> user = userRepository.findByCin(userCin);
         if(user.isPresent()) return user.get();

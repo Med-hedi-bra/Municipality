@@ -37,7 +37,7 @@ public class MunicipalityService {
 
     public void addMunicipality(Municipality municipality)
     {
-        Optional<Municipality> muni = municipalityRepository.findById(municipality.getId());
+        Optional<Municipality> muni = municipalityRepository.findById(municipality.getIdMun());
         if (muni.isPresent()){
             throw new IllegalStateException("la municipalite existe !");
         }

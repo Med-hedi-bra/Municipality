@@ -28,8 +28,8 @@ public class PostController {
     }
 
     @GetMapping("/get/municipality/{id}")
-    public List<Post> getByIdMunicipality(@PathVariable("id") Long id){
-        return  postService.getByIdMun(id);
+    public List<Post> getByIdMunicipality(@PathVariable("id") Long idMun){
+        return  postService.getPostsByIdMun(idMun);
 
     }
 
