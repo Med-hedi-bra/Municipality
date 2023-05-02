@@ -3,6 +3,7 @@ package com.example.mini_projet.User;
 import com.example.mini_projet.Demande.Demande;
 import com.example.mini_projet.ContentOfBirth.ContentOfBirth;
 import com.example.mini_projet.Auth.Token;
+import com.example.mini_projet.Enums.Role;
 import com.example.mini_projet.Municipality.Municipality;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -48,6 +49,8 @@ public class User implements UserDetails {
     private String lastname;
 
 
+
+
 //    @NotBlank
     @Size(max = 50)
     private String gender;
@@ -59,7 +62,7 @@ public class User implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private com.example.mini_projet.Enums.Role Role;
+    private com.example.mini_projet.Enums.Role role;
 
 //    @NotBlank
     private boolean valid ;
@@ -69,7 +72,7 @@ public class User implements UserDetails {
     private Municipality municipality;
 
     public Long getMunicipality() {
-        return municipality.getId();
+        return municipality.getIdMun();
     }
 
     @OneToOne(targetEntity = ContentOfBirth.class , mappedBy = "user")
@@ -92,7 +95,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(Role.name()));
+        return role.getAuthorities();
 
     }
 

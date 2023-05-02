@@ -11,12 +11,18 @@ import java.util.Optional;
 @Repository
 public interface MunicipalityRepository extends JpaRepository<Municipality , Long> {
 
-    Optional<Municipality> findById(Long id);
+
+
+    Optional<Municipality> findById(Long idMun);
+
+
 
     List<Municipality> findAll();
 
-    @Query("SELECT m FROM Municipality m  WHERE m.id = ?1")
-    Municipality findByCodeMuni(Long id);
+
+
+    @Query("SELECT m FROM Municipality m  WHERE m.idMun = ?1")
+    Municipality findByCodeMuni(Long idMun);
 
 
 }

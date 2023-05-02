@@ -12,6 +12,7 @@ import org.springframework.security.authorization.AuthenticatedAuthorizationMana
 import org.springframework.security.authorization.AuthorityAuthorizationManager;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.AuthorizationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -27,15 +28,20 @@ import org.springframework.security.web.util.matcher.AnyRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
+import static com.example.mini_projet.Enums.Role.ADMIN;
+import static com.example.mini_projet.Enums.Role.SUBADMIN;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableMethodSecurity
 public class SecurityConfig {
 
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
+
 
 
 
@@ -49,8 +55,9 @@ public class SecurityConfig {
                 .disable()
 
                 .authorizeHttpRequests()
-                .requestMatchers("/**").permitAll()
-                //.requestMatchers("/admin/**").hasAuthority("ADMIN")
+                .requestMatchers("/municipality/auth/**").permitAll()
+                //.requestMatchers("/municipality/subadmin/**").hasAnyRole(SUBADMIN.name())
+                //.requestMatchers()
 
 
                 .anyRequest()
