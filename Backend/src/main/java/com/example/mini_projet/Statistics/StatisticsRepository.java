@@ -9,5 +9,6 @@ import java.util.List;
 public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
 
     List<Statistics> findAll();
+
     Statistics getByMunicipalityId(Long id);
 }

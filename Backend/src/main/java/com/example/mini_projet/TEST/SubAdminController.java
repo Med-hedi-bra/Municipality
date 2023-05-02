@@ -9,6 +9,7 @@ import com.example.mini_projet.Statistics.Statistics;
 import com.example.mini_projet.Statistics.StatisticsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +17,12 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("municipality/subadmin")
+@PreAuthorize("hasRole('SUBADMIN')")
 public class SubAdminController {
     final StatisticsService statisticsService;
     final MunicipalityService municipalityService;
     final DemandeService demandeService;
+
 
     @GetMapping("/get")
     public List<Demande> getAllDeamndes(){
