@@ -10,6 +10,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.io.InputStream;
+import java.sql.Blob;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Table

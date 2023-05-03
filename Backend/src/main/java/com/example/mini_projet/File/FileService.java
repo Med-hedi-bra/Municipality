@@ -15,7 +15,7 @@ public class FileService {
     private FileRepository fileRepository;
 
 
-    public boolean store(MultipartFile file) throws IOException {
+    public File store(MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         File FileDB = File.builder()
                 .fileType(file.getContentType())
@@ -23,10 +23,12 @@ public class FileService {
                 .data(file.getBytes())
                 .build();
 
-       fileRepository.save(FileDB);
         System.out.println("=================================");
         System.out.println(file.getContentType());
-       return true;
+
+       return fileRepository.save(FileDB);
+
+
     }
 
 

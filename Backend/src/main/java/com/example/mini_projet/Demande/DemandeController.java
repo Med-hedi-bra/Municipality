@@ -6,6 +6,7 @@ import com.example.mini_projet.File.File;
 import com.example.mini_projet.File.FileService;
 import com.example.mini_projet.File.message.ResponseFile;
 import com.example.mini_projet.File.message.ResponseMessage;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -46,9 +47,12 @@ public class DemandeController {
 
 
     @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
         String message = "";
         try {
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            System.out.println(request.getUserPrincipal().getName());
+            System.out.println(request.getContentType());
             fileService.store(file);
 
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
