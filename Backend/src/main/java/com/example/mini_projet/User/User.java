@@ -69,7 +69,7 @@ public class User implements UserDetails {
     private boolean valid ;
 
     @ManyToOne
-    @JoinColumn(name = "id_mun")
+    @JoinColumn(name = "id_mun", nullable = true)
     @Getter
     @Setter
     private Municipality municipality;
