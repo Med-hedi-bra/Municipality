@@ -14,11 +14,15 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DemandeRequest implements Serializable {
+
+    private String title;
+
     @NotBlank
     private Demande_Type type;
 
     @NotBlank
     private State_Enum state;
+
 
     private MultipartFile file;
 

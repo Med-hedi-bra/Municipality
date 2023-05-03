@@ -39,7 +39,7 @@ public class PostService {
         Municipality municipality = municipalityRepository.findByCodeMuni(idMun);
         try {
 
-             p.setMunicipality(municipality);
+            p.setMunicipality(municipality);
             postRepository.save(p);
             return true;
         }

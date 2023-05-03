@@ -2,6 +2,7 @@ package com.example.mini_projet.Demande;
 
 
 import com.example.mini_projet.Dto.Request.DemandeRequest;
+import com.example.mini_projet.File.FileRepository;
 import com.example.mini_projet.User.UserService;
 import com.example.mini_projet.User.User;
 import com.example.mini_projet.Enums.State_Enum;
@@ -22,6 +23,7 @@ public class DemandeService {
 
     final DemandeRepository demandeRepository;
     final UserService userService;
+    final FileRepository fileRepository;
 
 
 

@@ -6,6 +6,7 @@ import com.example.mini_projet.User.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,31 +15,36 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
+
 public class File {
 
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        private Long id;
+        private Long idFile;
+
         @Column
         private String name;
 
         @Lob
         @Column
-        private String content;
+        private byte[] data;
 
         @Column
         private String fileType;
 
 
-        @ManyToOne(fetch = FetchType.LAZY)
+        @ManyToOne(targetEntity = User.class,fetch = FetchType.LAZY)
         @JoinColumn(name = "cin")
         @JsonBackReference
+        @Getter
         private User user;
 
-        public String getUser() {
+        public String getCin() {
                 return user.getCin();
         }
+
+
 
 
     }
