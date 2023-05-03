@@ -70,6 +70,8 @@ public class User implements UserDetails {
 
     @ManyToOne
     @JoinColumn(name = "id_mun")
+    @Getter
+    @Setter
     private Municipality municipality;
 
     public Long getMunicipality() {

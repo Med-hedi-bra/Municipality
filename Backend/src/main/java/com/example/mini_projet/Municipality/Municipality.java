@@ -39,7 +39,10 @@ public class Municipality {
     @Size(min = 3)
     private String president;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "municipality")
+
+    @OneToMany(mappedBy = "municipality")
+    @Getter
+    @Setter
     private Set<User> users = new HashSet<>();
 
     public Set<User> getUsers() {
