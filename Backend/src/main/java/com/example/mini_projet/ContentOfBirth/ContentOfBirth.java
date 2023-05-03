@@ -22,13 +22,14 @@ public class ContentOfBirth   {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long idCob;
 
 
 
-//    @OneToOne(targetEntity = User.class )
-//    @JoinColumn(name = "cin")
-//    private User user;
+    @OneToOne(targetEntity = User.class )
+    @JoinColumn(name = "cin")
+    private User user;
 
 
 //    @OneToOne(targetEntity = File.class)

@@ -48,10 +48,10 @@ public class DemandeService {
         try {
             User user = userService.getByCin(userCin);
             Demande demande = Demande.builder()
+                    .title(demandeRequest.getTitle())
                     .state(State_Enum.PENDING)
                     .type(demandeRequest.getType())
                     .user(user)
-                    .file(new SerialBlob(demandeRequest.getFile().getBytes()))
                     .build();
             demandeRepository.save(demande);
             return true;

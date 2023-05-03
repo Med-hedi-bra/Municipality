@@ -4,10 +4,7 @@ package com.example.mini_projet.Statistics;
 import com.example.mini_projet.Municipality.Municipality;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
@@ -37,6 +34,8 @@ public class Statistics {
     @OneToOne(targetEntity = Municipality.class)
     @JoinColumn(name = "id_mun")
     @JsonBackReference
+    @Getter
+    @Setter
     private Municipality municipality;
 
 

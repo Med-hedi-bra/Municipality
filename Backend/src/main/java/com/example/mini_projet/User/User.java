@@ -78,19 +78,18 @@ public class User implements UserDetails {
         return municipality.getIdMun();
     }
 
-//    @OneToOne(targetEntity = ContentOfBirth.class , mappedBy = "user")
-//    private ContentOfBirth contentOfBirth;
+    @OneToOne(targetEntity = ContentOfBirth.class , mappedBy = "user")
+    private ContentOfBirth contentOfBirth;
 
 
     @OneToMany(targetEntity = Demande.class , mappedBy = "user")
-    @JsonBackReference
-    private List<Demande> demandes;
-
-
-    @OneToMany(targetEntity = File.class, mappedBy = "user",cascade = CascadeType.ALL)
     @JsonManagedReference
+    private List<Demande> demandes = new ArrayList<>();
 
-    private List<File> cvs = new ArrayList<>();
+
+//    @OneToMany(targetEntity = File.class, mappedBy = "user",cascade = CascadeType.ALL)
+//    @JsonManagedReference
+//    private List<File> cvs = new ArrayList<>();
 
 
 

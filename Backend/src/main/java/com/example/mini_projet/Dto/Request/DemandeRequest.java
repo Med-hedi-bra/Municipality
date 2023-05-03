@@ -2,6 +2,7 @@ package com.example.mini_projet.Dto.Request;
 
 import com.example.mini_projet.Enums.Demande_Type;
 import com.example.mini_projet.Enums.State_Enum;
+import com.example.mini_projet.File.File;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,6 @@ public class DemandeRequest implements Serializable {
     private State_Enum state;
 
 
-    private MultipartFile file;
+    //private MultipartFile file;
 
 }

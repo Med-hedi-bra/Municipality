@@ -29,7 +29,9 @@ public class PostController {
 
     @GetMapping("/get/municipality/{id}")
     public List<Post> getByIdMunicipality(@PathVariable("id") Long idMun){
-        return  postService.getPostsByIdMun(idMun);
+
+        return postService.getPostsByIdMun(idMun);
+
 
     }
 
@@ -42,7 +44,7 @@ public class PostController {
              response = new MessageResponse("Post added successfully");
             return new ResponseEntity(response , HttpStatus.resolve(202));
         }
-         response = new MessageResponse("Post added successfully");
+         response = new MessageResponse("Post Not added successfully");
         return  new ResponseEntity(response , HttpStatus.resolve(404));
     }
 
