@@ -35,8 +35,8 @@ public class PostService {
         throw new IllegalStateException("Post not found");
     }
 
-    public boolean insert(Post p , Long id_mun){
-        Municipality municipality = municipalityService.getById(id_mun);
+    public boolean insert(Post p , Long idMun){
+        Municipality municipality = municipalityRepository.findByCodeMuni(idMun);
         try {
 
              p.setMunicipality(municipality);

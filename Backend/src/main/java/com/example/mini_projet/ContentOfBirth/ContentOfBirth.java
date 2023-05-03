@@ -19,10 +19,12 @@ import java.sql.Blob;
 @Entity
 public class ContentOfBirth {
     @Id
-    private Long id;
+    private Long idCob;
 
     @OneToOne(targetEntity = User.class )
     @JoinColumn(name = "cin")
     private User user;
-    private Blob file;
+
+
+    private String file;
 }

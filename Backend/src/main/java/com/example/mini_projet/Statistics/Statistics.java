@@ -20,6 +20,7 @@ public class Statistics {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_stat")
+
     private Long idStat;
 
     private Integer population;
@@ -32,10 +33,12 @@ public class Statistics {
 
 
 
+
     @OneToOne(targetEntity = Municipality.class)
     @JoinColumn(name = "id_mun")
     @JsonBackReference
     private Municipality municipality;
+
 
     public Long getMunicipality() {
         return municipality.getIdMun();

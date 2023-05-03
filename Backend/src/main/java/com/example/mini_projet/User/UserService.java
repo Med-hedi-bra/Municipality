@@ -33,12 +33,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
+
     public User getByCin(String userCin){
         Optional<User> user = userRepository.findByCin(userCin);
         if(user.isPresent()) return user.get();
         throw new IllegalStateException("User not found");
     }
-
 
     public List<User> getUsersByCodeMun(@PathVariable Long codeMun){
         List<User> users = userRepository.findAll();

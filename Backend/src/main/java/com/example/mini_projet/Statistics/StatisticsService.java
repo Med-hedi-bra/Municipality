@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class StatisticsService {
+
+
     final StatisticsRepository statisticsRepository;
     final MunicipalityService municipalityService;
     final MunicipalityRepository municipalityRepository;
@@ -29,23 +31,11 @@ public class StatisticsService {
 
 
 
-    public Statistics getById(Long id) {
-        Optional<Statistics> statistics =  statisticsRepository.findById(id);
+    public Statistics getById(Long idStat)
+    {
+        Optional<Statistics> statistics =  statisticsRepository.findById(idStat);
         if(statistics.isPresent())  return statistics.get();
         else throw new IllegalStateException("Statisitics not exist");
-    }
-
-
-    public boolean insert(Statistics s , Long idMun) {
-
-        try {
-            Municipality municipality= municipalityService.getById(idMun);
-            s.setMunicipality(municipality);
-            statisticsRepository.save(s);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 
     public Optional<Statistics> getStatByIdMun(@PathVariable Long codeMun){
@@ -55,6 +45,23 @@ public class StatisticsService {
                         .findFirst();
         return statByMun;
     }
+
+
+
+    public boolean insertStat(Statistics s , Long idMun) {
+        try {
+            Municipality municipality= municipalityRepository.findByCodeMuni(idMun);
+            s.setMunicipality(municipality);
+            statisticsRepository.save(s);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
+
+
 
     @Transactional
     public boolean updateStatistics(Long id, Statistics s) {
@@ -81,6 +88,8 @@ public class StatisticsService {
         return true;
     }
 
+
+
     public boolean deleteById(Long id) {
         Optional<Statistics> statistics = statisticsRepository.findById(id);
         if (statistics.isEmpty()) return false;
@@ -88,17 +97,7 @@ public class StatisticsService {
         return true;
     }
 
-    public boolean deleteAll(){
-        try {
-            statisticsRepository.deleteAll();
-            return true;
-        }
-        catch (Exception e){
-            return false;
-        }
 
-
-    }
 
 
 }

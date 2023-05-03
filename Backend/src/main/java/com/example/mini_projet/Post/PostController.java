@@ -33,6 +33,7 @@ public class PostController {
 
     }
 
+
     @PostMapping("/add/municipality/{id}")
     public ResponseEntity addNewPost(@PathVariable("id") Long id_mun, @RequestBody Post p){
         MessageResponse response;

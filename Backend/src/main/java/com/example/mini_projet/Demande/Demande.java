@@ -25,7 +25,7 @@ public class Demande {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_dem")
-    private Long id;
+    private Long idDemande;
 
     @Enumerated(EnumType.STRING)
     private Demande_Type type;
@@ -43,6 +43,10 @@ public class Demande {
     @JoinColumn(name = "cin")
     @JsonManagedReference
     private User user;
+
+    public String getCin() {
+        return user.getCin();
+    }
 
 
 }

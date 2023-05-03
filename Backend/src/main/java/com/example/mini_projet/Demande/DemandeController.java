@@ -32,6 +32,9 @@ public class DemandeController {
         return demandeService.getByUserCin(cin);
     }
 
+
+
+
     @PostMapping(value = "/add/user/{cin}")
     public ResponseEntity addDemande(@ModelAttribute DemandeRequest demandeRequest , @PathVariable("cin") String userCin
     ){
@@ -46,6 +49,9 @@ public class DemandeController {
         return new ResponseEntity(response , HttpStatusCode.valueOf(410));
     }
 
+
+
+
     @PutMapping("/update/{id}")
     public ResponseEntity update( @RequestBody DemandeRequest demandeRequest , @PathVariable("id") Long id){
         boolean test = demandeService.update(demandeRequest , id);
@@ -58,22 +64,28 @@ public class DemandeController {
         return new ResponseEntity(response , HttpStatusCode.valueOf(410));
     }
 
-    @DeleteMapping("/deleteAll")
-    public ResponseEntity deleteAll(){
-        MessageResponse response = new MessageResponse();
-        boolean test = demandeService.deleteAll();
-        if(test){
-            response.setMessage("Deleted all Demands");
-            return new ResponseEntity(response , HttpStatusCode.valueOf(210));
-        }
-        response.setMessage("Failure to delete all demands");
-        return new ResponseEntity(response , HttpStatusCode.valueOf(450));
-    }
+
+
+    // il faut toujours laisser de trace
+//    @DeleteMapping("/deleteAll")
+//    public ResponseEntity deleteAll(){
+//        MessageResponse response = new MessageResponse();
+//        boolean test = demandeService.deleteAll();
+//        if(test){
+//            response.setMessage("Deleted all Demands");
+//            return new ResponseEntity(response , HttpStatusCode.valueOf(210));
+//        }
+//        response.setMessage("Failure to delete all demands");
+//        return new ResponseEntity(response , HttpStatusCode.valueOf(450));
+//    }
+
+
+
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity deleteByID(@PathVariable("id") Long id ){
+    public ResponseEntity deleteByID(@PathVariable("id") Long idDemande ){
         MessageResponse response = new MessageResponse();
-        boolean test = demandeService.delete(id);
+        boolean test = demandeService.delete(idDemande);
         if(test){
             response.setMessage("Deleted  Demand successfully");
             return new ResponseEntity(response , HttpStatusCode.valueOf(210));

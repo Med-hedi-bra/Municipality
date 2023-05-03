@@ -17,8 +17,15 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class DemandeService {
+
+
+
     final DemandeRepository demandeRepository;
     final UserService userService;
+
+
+
+
     public List<Demande> getAll(){
         return demandeRepository.findAll();
     }
@@ -32,6 +39,7 @@ public class DemandeService {
     public List<Demande> getByUserCin(String userCin){
         return demandeRepository.findByUserCin(userCin);
     }
+
 
     public boolean insert(DemandeRequest demandeRequest , String userCin){
 
@@ -55,31 +63,9 @@ public class DemandeService {
 //    }
 
 
-    public boolean deleteAll(){
-        try {
-            demandeRepository.deleteAll();
-            return true;
-        }
-        catch (Exception e){
-            return  false;
-        }
-    }
-    public boolean deleteAllByUser(Long userCin){
-        return true;
-    }
-    public boolean delete(Long id){
-
-        try {
-            demandeRepository.deleteById(id);
-            return true;
-        }
-        catch (Exception e){
-            return  false;
-        }
-    }
-
     @Transactional
-    public boolean update(DemandeRequest demandeRequest, Long id) {
+    public boolean update(DemandeRequest demandeRequest, Long id)
+    {
         try{
             Demande demande = getById(id);
             if(demandeRequest.getType() != null && !Objects.equals(demandeRequest.getType() , demande.getType())){
@@ -97,4 +83,29 @@ public class DemandeService {
 
 
     }
+
+
+    public boolean deleteAll(){
+        try {
+            demandeRepository.deleteAll();
+            return true;
+        }
+        catch (Exception e){
+            return  false;
+        }
+    }
+
+
+    public boolean delete(Long id){
+
+        try {
+            demandeRepository.deleteById(id);
+            return true;
+        }
+        catch (Exception e){
+            return  false;
+        }
+    }
+
+
 }

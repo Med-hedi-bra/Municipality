@@ -4,20 +4,20 @@ import com.example.mini_projet.Demande.Demande;
 import com.example.mini_projet.ContentOfBirth.ContentOfBirth;
 import com.example.mini_projet.Auth.Token;
 import com.example.mini_projet.Enums.Role;
+import com.example.mini_projet.File.File;
 import com.example.mini_projet.Municipality.Municipality;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +27,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Getter
 
 @Table(name = "user")
 public class User implements UserDetails {
@@ -82,6 +83,11 @@ public class User implements UserDetails {
     @OneToMany(targetEntity = Demande.class , mappedBy = "user")
     @JsonBackReference
     private List<Demande> demandes;
+
+
+    @OneToMany(targetEntity = File.class, mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<File> cvs = new ArrayList<>();
 
 
 
