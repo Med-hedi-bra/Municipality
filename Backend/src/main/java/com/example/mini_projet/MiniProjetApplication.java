@@ -31,12 +31,23 @@ public class MiniProjetApplication {
 	)
 	{
 		return args -> {
+			var municipality = Municipality.builder()
+					.idMun(1L)
+					.maitre("wassef")
+					.president("wassef")
+					.secritaire("wassef")
+					.build();
+			municipalityRepository.save(municipality);
+			System.out.println("municipality 1 created");
+
+
 			var admin = User.builder()
 					.firstname("admin")
 					.lastname("admin")
 					.cin("00000000")
 					.role(Role.ADMIN)
 					.password(passwordEncoder.encode("1234"))
+					.municipality(municipality)
 					.build();
 			userRepository.save(admin);
 
@@ -48,18 +59,12 @@ public class MiniProjetApplication {
 					.cin("11111111")
 					.role(Role.SUBADMIN)
 					.password(passwordEncoder.encode("1234"))
+					.municipality(municipality)
 					.build();
 			userRepository.save(subadmin);
 			System.out.println("subadmin created");
 
-			var municipality = Municipality.builder()
-					.idMun(1L)
-					.maitre("wassef")
-					.president("wassef")
-					.secritaire("wassef")
-					.build();
-			municipalityRepository.save(municipality);
-			System.out.println("municipality 1 created");
+
 		};
 	}
 
