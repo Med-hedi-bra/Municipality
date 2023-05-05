@@ -11,6 +11,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/municipality")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class MunicipalityController {
     final MunicipalityService municipalityService;
 

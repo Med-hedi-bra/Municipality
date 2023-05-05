@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/demande")
+@CrossOrigin(origins = "*")
 public class DemandeController {
 
     final DemandeService demandeService;
