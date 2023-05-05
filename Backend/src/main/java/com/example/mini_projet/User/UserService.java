@@ -1,32 +1,51 @@
 package com.example.mini_projet.User;
 
+import com.example.mini_projet.Municipality.MunicipalityRepository;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-//@RequiredArgsConstructor
+
 public class UserService {
+
+
     final UserRepository userRepository;
+    final MunicipalityRepository municipalityRepository;
 
     @Autowired
 
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository,MunicipalityRepository municipalityRepository){
         this.userRepository = userRepository;
+        this.municipalityRepository = municipalityRepository;
     }
 
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
+
+
     public User getByCin(String userCin){
         Optional<User> user = userRepository.findByCin(userCin);
         if(user.isPresent()) return user.get();
         throw new IllegalStateException("User not found");
+    }
+
+    public List<User> getUsersByCodeMun(@PathVariable Long codeMun){
+        List<User> users = userRepository.findAll();
+        List<User> usersByMun =
+                users.stream().filter(usr -> usr.getMunicipality().equals(municipalityRepository.findById(codeMun).get()))
+                        .collect(Collectors.toList());
+        return usersByMun;
     }
 
 

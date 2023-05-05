@@ -8,6 +8,8 @@ import java.util.List;
 
 @Repository
 public interface DemandeRepository extends JpaRepository<Demande , Long> {
+
     List<Demande> findAll();
+
     List<Demande> findByUserCin(String cinUser);
 }

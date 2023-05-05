@@ -1,15 +1,16 @@
 package com.example.mini_projet.Demande;
 
+import com.example.mini_projet.File.File;
+import com.example.mini_projet.Municipality.Municipality;
+import com.example.mini_projet.Statistics.Statistics;
 import com.example.mini_projet.User.User;
 import com.example.mini_projet.Enums.Demande_Type;
 import com.example.mini_projet.Enums.State_Enum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Blob;
 
@@ -19,11 +20,17 @@ import java.sql.Blob;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "demande")
 public class Demande {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "id_dem")
+    private Long idDemande;
+
+    @Column
+    private String title;
+
 
     @Enumerated(EnumType.STRING)
     private Demande_Type type;
@@ -32,15 +39,26 @@ public class Demande {
     @Enumerated(EnumType.STRING)
     private  State_Enum state;
 
-    @Lob
-    private Blob file;
+//    @Lob
+//    private Blob file;
 
 
-    @ManyToOne(targetEntity = User.class ,fetch = FetchType.LAZY)
-    @JsonIgnore
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cin")
-    @JsonManagedReference
+    @JsonBackReference
+    @Getter
+    @Setter
     private User user;
+
+
+
+    @OneToOne(targetEntity = File.class,mappedBy = "demande" , fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private File file;
+
+
+
 
 
 }
