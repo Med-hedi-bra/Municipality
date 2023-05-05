@@ -7,10 +7,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -21,12 +18,14 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Getter
 @Table(name = "municipality")
 public class Municipality {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "id_mun")
+    private Long idMun;
 
     //@NotBlank
     @Size(min = 3)
@@ -40,7 +39,10 @@ public class Municipality {
     @Size(min = 3)
     private String president;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "municipality")
+
+    @OneToMany(mappedBy = "municipality")
+    @Getter
+    @Setter
     private Set<User> users = new HashSet<>();
 
     public Set<User> getUsers() {
@@ -58,7 +60,7 @@ public class Municipality {
     private Statistics statistics;
 
 
-    @OneToMany(targetEntity = Post.class , mappedBy = "municipality" ,fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Post.class , mappedBy = "municipality" ,fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Post> posts;
 

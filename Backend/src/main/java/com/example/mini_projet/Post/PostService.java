@@ -1,23 +1,28 @@
 package com.example.mini_projet.Post;
 
 import com.example.mini_projet.Dto.Request.PostRequest;
+import com.example.mini_projet.Municipality.MunicipalityRepository;
 import com.example.mini_projet.Municipality.MunicipalityService;
 import com.example.mini_projet.Municipality.Municipality;
 import com.example.mini_projet.Enums.Post_Type;
+import com.example.mini_projet.User.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PostService {
 
     final PostRepository postRepository;
+    final MunicipalityRepository municipalityRepository;
     final MunicipalityService municipalityService;
 
     public List<Post> getAll(){
@@ -30,17 +35,17 @@ public class PostService {
         throw new IllegalStateException("Post not found");
     }
 
-    public boolean insert(Post p , Long id_mun){
-        Municipality municipality = municipalityService.getById(id_mun);
-        try {
+    public boolean insert(Post p , Long idMun){
+        Optional<Municipality> municipality = municipalityRepository.findById(idMun);
+        if(municipality.isPresent()) {
 
-             p.setMunicipality(municipality);
+            p.setMunicipality(municipality.get());
             postRepository.save(p);
             return true;
+        }else {
+            return false;
         }
-        catch (Exception e){
-            throw e;
-        }
+
     }
 
     @Transactional
@@ -89,8 +94,14 @@ public class PostService {
         }
     }
 
-    public List<Post> getByIdMun(Long idMun) {
-        return postRepository.findByMunicipalityId(idMun);
+    public List<Post> getPostsByIdMun(@PathVariable Long codeMun){
+        List<Post> posts = postRepository.findAll();
+        List<Post> postsByMun =
+                posts.stream().filter(post -> post.getMunicipality().equals(municipalityRepository.findById(codeMun).get()))
+                        .collect(Collectors.toList());
+
+            return postsByMun;
+
 
     }
 }

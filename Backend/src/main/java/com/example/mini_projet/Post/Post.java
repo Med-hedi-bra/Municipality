@@ -22,11 +22,12 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "post")
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long idPost;
 
     @NotBlank
     private String title;
@@ -43,9 +44,13 @@ public class Post {
     private Date date_added;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_Mun")
+    @JoinColumn(name = "id_mun")
     @JsonBackReference
     private Municipality municipality;
+
+    public Long getMunicipality() {
+        return municipality.getIdMun();
+    }
 
 
 //    @OneToMany(targetEntity = Image.class , mappedBy = "post")

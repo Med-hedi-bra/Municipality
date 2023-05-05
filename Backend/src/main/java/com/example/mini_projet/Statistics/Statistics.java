@@ -4,21 +4,21 @@ package com.example.mini_projet.Statistics;
 import com.example.mini_projet.Municipality.Municipality;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "statistics")
 public class Statistics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "id_stat")
+
+    private Long idStat;
 
     private Integer population;
 
@@ -30,9 +30,16 @@ public class Statistics {
 
 
 
-    @OneToOne(targetEntity = Municipality.class )
-    @MapsId
+
+    @OneToOne(targetEntity = Municipality.class)
     @JoinColumn(name = "id_mun")
     @JsonBackReference
+    @Getter
+    @Setter
     private Municipality municipality;
+
+
+    public Long getMunicipality() {
+        return municipality.getIdMun();
+    }
 }
