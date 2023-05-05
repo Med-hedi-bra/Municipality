@@ -6,7 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.stream.Stream;
 
 @Service
@@ -15,7 +18,7 @@ public class FileService {
     private FileRepository fileRepository;
 
 
-    public File store(MultipartFile file) throws IOException {
+    public File store(MultipartFile file) throws IOException, SQLException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         File FileDB = File.builder()
                 .fileType(file.getContentType())

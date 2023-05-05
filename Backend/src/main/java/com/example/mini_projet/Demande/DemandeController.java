@@ -47,12 +47,12 @@ public class DemandeController {
 
 
     @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
         try {
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            System.out.println(request.getUserPrincipal().getName());
-            System.out.println(request.getContentType());
+//            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//            System.out.println(request.getUserPrincipal().getName());
+//            System.out.println(request.getContentType());
             fileService.store(file);
 
             message = "Uploaded the file successfully: " + file.getOriginalFilename();

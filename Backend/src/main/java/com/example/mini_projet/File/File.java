@@ -9,6 +9,7 @@ import io.jsonwebtoken.io.Decoders;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.io.InputStream;
 import java.sql.Blob;
@@ -20,19 +21,18 @@ import java.sql.Blob;
 @Getter
 @Setter
 @Builder
-
 public class File {
 
 
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(generator = "uuid")
+        @GenericGenerator(name = "uuid", strategy = "uuid2")
         private String idFile;
 
         @Column
         private String name;
 
         @Lob
-        @Column
         private byte[] data;
 
         @Column
