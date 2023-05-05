@@ -15,6 +15,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/municipality/user")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class UserController {
 
     final UserService userService;

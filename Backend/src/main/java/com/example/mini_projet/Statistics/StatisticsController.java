@@ -12,6 +12,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/statistics")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class StatisticsController {
     final StatisticsService statisticsService;
 
