@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/municipality")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class MunicipalityController {
     final MunicipalityService municipalityService;
     @GetMapping("/")

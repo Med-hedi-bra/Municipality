@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/demande")
+@CrossOrigin(origins = "*")
 public class DemandeController {
 
     final DemandeService demandeService;
