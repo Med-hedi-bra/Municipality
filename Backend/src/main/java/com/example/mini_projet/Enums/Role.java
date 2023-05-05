@@ -32,16 +32,24 @@ public enum Role {
     ,
     SUBADMIN(
             Set.of(
-                    SUBADMIN_CREATE,
-                    SUBADMIN_DELETE,
-                    SUBADMIN_UPDATE,
-                    SUBADMIN_READ
+                    USER_READ,
+                    USER_CREATE,
+                    USER_DELETE,
+                    USER_UPDATE
+
             )
     ),
-    USER(Collections.emptySet());
+
+
+    USER(
+            Set.of(
+
+            )
+    );
 
     @Getter
     private final Set<Permission> permissions;
+
 
     public List<SimpleGrantedAuthority> getAuthorities(){
         var authorities = getPermissions()

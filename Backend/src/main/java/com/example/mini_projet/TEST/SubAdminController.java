@@ -17,8 +17,11 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("municipality/subadmin")
-@PreAuthorize("hasRole('SUBADMIN')")
+@PreAuthorize("hasAnyRole('SUBADMIN, ADMIN')")
 public class SubAdminController {
+
+
+
     final StatisticsService statisticsService;
     final MunicipalityService municipalityService;
     final DemandeService demandeService;
@@ -40,7 +43,7 @@ public class SubAdminController {
     @PostMapping("/add/municipality/{id}")
     public ResponseEntity<String> addStatistic(@RequestBody Statistics s , @PathVariable("id") Long idMun){
 
-        boolean test = statisticsService.insert(s , idMun);
+        boolean test = statisticsService.insertStat(s , idMun);
         if(test){
             return ResponseEntity.status(201).body("Statistics added successfully");
         }

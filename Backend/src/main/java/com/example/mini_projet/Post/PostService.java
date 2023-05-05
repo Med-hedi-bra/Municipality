@@ -35,17 +35,17 @@ public class PostService {
         throw new IllegalStateException("Post not found");
     }
 
-    public boolean insert(Post p , Long id_mun){
-        Municipality municipality = municipalityService.getById(id_mun);
-        try {
+    public boolean insert(Post p , Long idMun){
+        Optional<Municipality> municipality = municipalityRepository.findById(idMun);
+        if(municipality.isPresent()) {
 
-             p.setMunicipality(municipality);
+            p.setMunicipality(municipality.get());
             postRepository.save(p);
             return true;
+        }else {
+            return false;
         }
-        catch (Exception e){
-            throw e;
-        }
+
     }
 
     @Transactional
@@ -99,6 +99,9 @@ public class PostService {
         List<Post> postsByMun =
                 posts.stream().filter(post -> post.getMunicipality().equals(municipalityRepository.findById(codeMun).get()))
                         .collect(Collectors.toList());
-        return postsByMun;
+
+            return postsByMun;
+
+
     }
 }

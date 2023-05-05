@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/municipality")
@@ -23,7 +24,7 @@ public class MunicipalityController {
 
 
     @GetMapping("/{id}")
-    public Municipality getById(@PathVariable("id") Long id){
+    public Optional<Municipality> getById(@PathVariable("id") Long id){
         return municipalityService.getById(id);
     }
 

@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/municipality/user")
@@ -23,11 +24,20 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+
+    @GetMapping(path = "/{cin}")
+    public User getUsersByCin(@PathVariable("cin") String cin){
+        return userService.getByCin(cin);
+
+    }
+
+
     @GetMapping(path = "/{codeMun}")
     public List<User> getUsersByCodeMun(@PathVariable("codeMun") Long codeMun){
         return userService.getUsersByCodeMun(codeMun);
 
     }
+
 
     @PutMapping("/update/{cin}")
         public ResponseEntity<String> updateUser(

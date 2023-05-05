@@ -2,6 +2,7 @@ package com.example.mini_projet.Demande;
 
 
 import com.example.mini_projet.Dto.Request.DemandeRequest;
+import com.example.mini_projet.File.FileRepository;
 import com.example.mini_projet.User.UserService;
 import com.example.mini_projet.User.User;
 import com.example.mini_projet.Enums.State_Enum;
@@ -17,8 +18,16 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class DemandeService {
+
+
+
     final DemandeRepository demandeRepository;
     final UserService userService;
+    final FileRepository fileRepository;
+
+
+
+
     public List<Demande> getAll(){
         return demandeRepository.findAll();
     }
@@ -33,15 +42,16 @@ public class DemandeService {
         return demandeRepository.findByUserCin(userCin);
     }
 
+
     public boolean insert(DemandeRequest demandeRequest , String userCin){
 
         try {
             User user = userService.getByCin(userCin);
             Demande demande = Demande.builder()
+                    .title(demandeRequest.getTitle())
                     .state(State_Enum.PENDING)
                     .type(demandeRequest.getType())
                     .user(user)
-                    .file(new SerialBlob(demandeRequest.getFile().getBytes()))
                     .build();
             demandeRepository.save(demande);
             return true;
@@ -55,31 +65,9 @@ public class DemandeService {
 //    }
 
 
-    public boolean deleteAll(){
-        try {
-            demandeRepository.deleteAll();
-            return true;
-        }
-        catch (Exception e){
-            return  false;
-        }
-    }
-    public boolean deleteAllByUser(Long userCin){
-        return true;
-    }
-    public boolean delete(Long id){
-
-        try {
-            demandeRepository.deleteById(id);
-            return true;
-        }
-        catch (Exception e){
-            return  false;
-        }
-    }
-
     @Transactional
-    public boolean update(DemandeRequest demandeRequest, Long id) {
+    public boolean update(DemandeRequest demandeRequest, Long id)
+    {
         try{
             Demande demande = getById(id);
             if(demandeRequest.getType() != null && !Objects.equals(demandeRequest.getType() , demande.getType())){
@@ -97,4 +85,29 @@ public class DemandeService {
 
 
     }
+
+
+    public boolean deleteAll(){
+        try {
+            demandeRepository.deleteAll();
+            return true;
+        }
+        catch (Exception e){
+            return  false;
+        }
+    }
+
+
+    public boolean delete(Long id){
+
+        try {
+            demandeRepository.deleteById(id);
+            return true;
+        }
+        catch (Exception e){
+            return  false;
+        }
+    }
+
+
 }

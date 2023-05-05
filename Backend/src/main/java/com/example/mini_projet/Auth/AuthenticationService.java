@@ -31,12 +31,12 @@ public class AuthenticationService {
     private final MunicipalityRepository municipalityRepository;
 
 
+
+
     public RegisterResponse register(RegisterRequest request)
     {
 
         Municipality mun = municipalityRepository.findByCodeMuni(request.getCodeMun());
-        System.out.println("===============");
-        System.out.println(mun);
 
         var user = User.builder()
                 .cin(request.getCin())
@@ -55,6 +55,7 @@ public class AuthenticationService {
         if (userRepository.findByCin(request.getCin()).isEmpty())
         {
             userRepository.save(user);
+            mun.addUser(user);
             return RegisterResponse.builder()
                     .message("User Registered with Success")
                     .build();
