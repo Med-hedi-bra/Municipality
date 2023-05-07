@@ -3,6 +3,7 @@ package com.example.mini_projet.Dto.Request;
 
 
 import com.example.mini_projet.Enums.Role;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -37,11 +38,16 @@ public class RegisterRequest {
     private String gender;
 
 
-    private Role role;
+//    private Role role;
 
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
+
+    @Email
+    @NotBlank
+    @Size(max = 50)
+    private String email;
 
     @NotBlank
     private String password;

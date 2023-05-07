@@ -45,8 +45,8 @@ public class AuthenticationService {
                 .gender(request.getGender())
                 .dateOfBirth(request.getDateOfBirth())
                 .role(Role.USER)
+                .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .valid(false)
                 .municipality(mun)
                 .build();
 

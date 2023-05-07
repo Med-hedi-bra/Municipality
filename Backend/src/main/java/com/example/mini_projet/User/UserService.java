@@ -81,10 +81,10 @@ public class UserService {
 
 
     // a function that set the status of citoyen that will be used by admin
-    public boolean setStatus(String cin , boolean status){
-        Optional<User> user = userRepository.findByCin(cin);
-        if(user.isEmpty()) return false;
-        user.get().setValid(status);
-        return true;
-    }
+//    public boolean setStatus(String cin , boolean status){
+//        Optional<User> user = userRepository.findByCin(cin);
+//        if(user.isEmpty()) return false;
+//        user.get().setValid(status);
+//        return true;
+//    }
 }
