@@ -70,12 +70,13 @@ public class DemandeService {
     {
         try{
             Demande demande = getById(id);
-            if(demandeRequest.getType() != null && !Objects.equals(demandeRequest.getType() , demande.getType())){
+            if(demandeRequest.getType() != null ){
                 demande.setType(demandeRequest.getType());
             }
-            if(demandeRequest.getState() != null && !Objects.equals(demandeRequest.getState()  , demande.getState())){
+            if(demandeRequest.getState() != null ){
                 demande.setState(demandeRequest.getState());
             }
+            if(demandeRequest.getTitle() !=null) demande.setTitle(demandeRequest.getTitle());
             return true;
         }
         catch (Exception e){
