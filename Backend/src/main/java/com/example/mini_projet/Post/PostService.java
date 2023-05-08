@@ -35,7 +35,7 @@ public class PostService {
         throw new IllegalStateException("Post not found");
     }
 
-    public boolean insert(Post p , Long idMun){
+    public boolean insert(Post p , Integer idMun){
         Optional<Municipality> municipality = municipalityRepository.findById(idMun);
         if(municipality.isPresent()) {
 
@@ -94,7 +94,7 @@ public class PostService {
         }
     }
 
-    public List<Post> getPostsByIdMun(@PathVariable Long codeMun){
+    public List<Post> getPostsByIdMun(@PathVariable Integer codeMun){
         List<Post> posts = postRepository.findAll();
         List<Post> postsByMun =
                 posts.stream().filter(post -> post.getMunicipality().equals(municipalityRepository.findById(codeMun).get()))

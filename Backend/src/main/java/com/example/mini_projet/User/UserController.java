@@ -33,7 +33,7 @@ public class UserController {
 
 
     @GetMapping(path = "/{codeMun}")
-    public List<User> getUsersByCodeMun(@PathVariable("codeMun") Long codeMun){
+    public List<User> getUsersByCodeMun(@PathVariable("codeMun") Integer codeMun){
         return userService.getUsersByCodeMun(codeMun);
 
     }

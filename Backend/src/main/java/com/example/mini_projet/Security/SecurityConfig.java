@@ -55,7 +55,10 @@ public class SecurityConfig {
                 .disable()
 
                 .authorizeHttpRequests()
+
+                
                 .requestMatchers("/**").permitAll()
+
                 //.requestMatchers("/municipality/subadmin/**").hasAnyRole(SUBADMIN.name())
                 //.requestMatchers()
 
