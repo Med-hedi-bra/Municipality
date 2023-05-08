@@ -75,7 +75,6 @@ public class User implements UserDetails {
     @JsonBackReference
     @Getter
     @Setter
-    @JsonBackReference
     private Municipality municipality;
 
     public Integer getMunicipality() {
