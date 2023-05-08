@@ -24,7 +24,7 @@ public class MunicipalityController {
 
 
     @GetMapping("/{id}")
-    public Optional<Municipality> getById(@PathVariable("id") Long id){
+    public Optional<Municipality> getById(@PathVariable("id") Integer id){
         return municipalityService.getById(id);
     }
 

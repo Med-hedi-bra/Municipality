@@ -11,6 +11,9 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User,String> {
 
 
+//    @Query("SELECT u FROM  User u  WHERE u.municipality = ?1")
+//    User getByIdMun(Integer codeMun);
+
     Optional<User> findByCin(String cin);
     List<User> findAll();
 
@@ -19,7 +22,7 @@ public interface UserRepository extends JpaRepository<User,String> {
 
     //List<User> getUsersBy
 
-    //@Query("SELECT u FROM  User u  WHERE u. = ?1")
-    //List<User> getUserByCodeMun(Long codeMun);
+//    @Query("SELECT u FROM  User u  WHERE u. = ?1")
+//    List<User> getUserByCodeMun(Long codeMun);
 
 }

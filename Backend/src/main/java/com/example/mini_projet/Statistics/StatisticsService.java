@@ -38,7 +38,7 @@ public class StatisticsService {
         else throw new IllegalStateException("Statisitics not exist");
     }
 
-    public Optional<Statistics> getStatByIdMun(@PathVariable Long codeMun){
+    public Optional<Statistics> getStatByIdMun(@PathVariable Integer codeMun){
         List<Statistics> stats = statisticsRepository.findAll();
         Optional<Statistics> statByMun =
                 stats.stream().filter(stat -> stat.getMunicipality().equals(municipalityRepository.findById(codeMun).get()))
@@ -48,7 +48,7 @@ public class StatisticsService {
 
 
 
-    public boolean insertStat(Statistics s , Long idMun) {
+    public boolean insertStat(Statistics s , Integer idMun) {
         try {
             Municipality municipality= municipalityRepository.findByCodeMuni(idMun);
             s.setMunicipality(municipality);

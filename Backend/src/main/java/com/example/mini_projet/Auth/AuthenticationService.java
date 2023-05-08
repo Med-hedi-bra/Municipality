@@ -7,6 +7,7 @@ import com.example.mini_projet.Dto.Request.RegisterRequest;
 import com.example.mini_projet.Dto.Response.RegisterResponse;
 import com.example.mini_projet.Municipality.Municipality;
 import com.example.mini_projet.Municipality.MunicipalityRepository;
+import com.example.mini_projet.Municipality.MunicipalityService;
 import com.example.mini_projet.User.UserRepository;
 import com.example.mini_projet.Security.JwtService;
 import com.example.mini_projet.Enums.Role;
@@ -29,6 +30,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final MunicipalityRepository municipalityRepository;
+    private final MunicipalityService municipalityService;
 
 
 
@@ -45,6 +47,7 @@ public class AuthenticationService {
                 .gender(request.getGender())
                 .dateOfBirth(request.getDateOfBirth())
                 .role(Role.USER)
+                .codeMun(request.getCodeMun())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .municipality(mun)
@@ -114,7 +117,7 @@ public class AuthenticationService {
                             request.getPassword()));
 
 
-            var user = userRepository.findByCin(request.getCin()).orElseThrow();
+            User user = userRepository.findByCin(request.getCin()).orElseThrow();
             var jwtToken = jwtService.generateToken(user);
             revokeAllUserTokens(user);
             saveUserToken(jwtToken, user);

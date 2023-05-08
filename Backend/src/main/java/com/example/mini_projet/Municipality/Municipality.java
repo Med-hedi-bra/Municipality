@@ -25,7 +25,7 @@ public class Municipality {
     @Id
     //@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_mun")
-    private Long idMun;
+    private Integer idMun;
 
     //@NotBlank
     @Size(min = 3)
@@ -43,7 +43,9 @@ public class Municipality {
     @OneToMany(mappedBy = "municipality")
     @Getter
     @Setter
-    private Set<User> users = new HashSet<>();
+    @JsonManagedReference
+
+    private Set<User> users = new HashSet<User>();
 
     public Set<User> getUsers() {
         return users;

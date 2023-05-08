@@ -60,7 +60,7 @@ public class User implements UserDetails {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
-    @Email
+
     private String email;
 
     //    @NotBlank
@@ -77,11 +77,16 @@ public class User implements UserDetails {
     @JoinColumn(name = "id_mun", nullable = true)
     @Getter
     @Setter
+    @JsonBackReference
     private Municipality municipality;
 
-    public Long getMunicipality() {
+    public Integer getMunicipality() {
         return municipality.getIdMun();
     }
+
+    private Integer codeMun ;
+
+
 
     @OneToOne(targetEntity = ContentOfBirth.class , mappedBy = "user")
     private ContentOfBirth contentOfBirth;

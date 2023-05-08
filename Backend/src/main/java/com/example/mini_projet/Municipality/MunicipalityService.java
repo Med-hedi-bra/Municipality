@@ -28,7 +28,7 @@ public class MunicipalityService {
     }
 
 
-    public Optional<Municipality> getById(Long idMun) {
+    public Optional<Municipality> getById(Integer idMun) {
         Optional<Municipality> municipality = municipalityRepository.findById(idMun);
         if(municipality.isEmpty()) throw new IllegalStateException("Municipliaty inexistant");
         return municipality;
@@ -53,10 +53,10 @@ public class MunicipalityService {
 
     @Transactional
     public Municipality addUserToMunicipality(
-            Long codeMun,
+            Integer codeMun,
             String cin){
         User user = userRepository.findById(cin).get();
-        Municipality municipality = municipalityRepository.findById(codeMun).get();
+        Municipality municipality = municipalityRepository.findByCodeMuni(codeMun);
         user.setMunicipality(municipality);
         municipality.addUser(user);
         return municipalityRepository.save(municipality);

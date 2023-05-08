@@ -53,7 +53,7 @@ public class RegisterRequest {
     private String password;
 
     //@NotBlank
-    private Long codeMun;
+    private Integer codeMun;
 
 
 
