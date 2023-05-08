@@ -124,6 +124,7 @@ public class AuthenticationService {
 
             return AuthenticationResponse.builder()
                     .token(jwtToken)
+                    .user(user)
                     .message("Login with Success")
                     .build();
         }

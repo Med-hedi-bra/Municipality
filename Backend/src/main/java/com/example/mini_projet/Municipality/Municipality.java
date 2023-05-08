@@ -41,6 +41,7 @@ public class Municipality {
 
 
     @OneToMany(mappedBy = "municipality")
+    @JsonManagedReference
     @Getter
     @Setter
     @JsonManagedReference

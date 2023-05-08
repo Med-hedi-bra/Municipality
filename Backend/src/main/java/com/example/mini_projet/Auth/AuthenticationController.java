@@ -6,6 +6,7 @@ import com.example.mini_projet.Dto.Request.AuthenticationRequest;
 import com.example.mini_projet.Dto.Response.AuthenticationResponse;
 import com.example.mini_projet.Dto.Request.RegisterRequest;
 import com.example.mini_projet.Dto.Response.RegisterResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -36,14 +37,17 @@ public class AuthenticationController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request)
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request,
+                                                               HttpServletRequest req)
     {
         AuthenticationResponse response = authenticationService.authenticate(request);
         int aux;
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("AUTHORIZATION", "BEARER " + response.getToken());
-        return new ResponseEntity(response.getMessage(),headers,HttpStatus.OK);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("AUTHORIZATION", "BEARER " + response.getToken());
+//        return new ResponseEntity(response.getMessage(),headers,HttpStatus.OK);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
 
     }
