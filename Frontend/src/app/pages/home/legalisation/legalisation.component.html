@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+
+<div class="login pt-70 pb-100">
+    <div class="container">
+        <div class="row">
+            
+            <section class="uni-banner">
+                <div class="container">
+                    <div class="uni-banner-text-area">
+                        <h1>Legalisation</h1>
+                        <ul>
+                            <li><a routerLink="home">Acceuil</a></li>
+                            <li>Legalisation</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="col-lg-6 col-md-12 offset-md-3 col-sm-12  col-12 " >
+                <div class="log-in-card">
+                    
+                    <div class="default-section-title">
+                        <h3>Create An Account</h3>
+                    </div>
+                    
+                    <div class="login-form">
+                        <form [formGroup]="demandeForm" >
+                            <!-- [formGroup]="registerForm" -->
+                            <!--(ngSubmit)="handleRegister()" -->
+                        
+                           
+                            <div class="mb-3"  >
+                                <input 
+                                type="text" 
+                                [formControlName]="'cin'" 
+                                class="form-control" 
+                                placeholder="CIN" 
+                                />
+                            </div>
+
+                            <div class="mb-3">
+                                <input
+                                type="text" 
+                                [formControlName]="'description'" 
+                                class="form-control" 
+                                placeholder="description" 
+                                >
+                            
+                            </div>
+
+                            <div class="mb-3" >
+                                <input 
+                                type="file" 
+                                [formControlName]="'file'" 
+                                class="form-control" 
+                                placeholder="Municipality" 
+                                />
+                            </div>
+                            
+                            
+                           
+                            <p>
+                                The file should be at most eight 200 Mb.
+                            <button type="submit" class="default-button">
+                                Submit <i class="fas fa-angle-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
