@@ -65,7 +65,24 @@ public class DemandeController {
     }
 
 
+
     @PostMapping(value = "/add/user/{cin}")
+    public ResponseEntity<ResponseMessage> addDemande(
+            @RequestBody DemandeRequest demandeRequest,
+            @PathVariable("cin") String userCin) throws IOException {
+        String message = "";
+        try{
+            demandeService.insert(demandeRequest , userCin);
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+        }
+
+    }
+
+    @PostMapping(value = "/add/userwithfile/{cin}")
     public ResponseEntity<ResponseMessage> addDemandeAndFile(
             @RequestBody DemandeRequest demandeRequest,
                                                       @PathVariable("cin") String userCin,

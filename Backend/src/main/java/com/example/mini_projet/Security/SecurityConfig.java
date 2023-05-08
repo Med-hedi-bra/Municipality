@@ -56,8 +56,11 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests()
 
-                
                 .requestMatchers("/**").permitAll()
+
+
+
+
 
                 //.requestMatchers("/municipality/subadmin/**").hasAnyRole(SUBADMIN.name())
                 //.requestMatchers()
