@@ -1,9 +1,14 @@
-import {  Injectable } from '@angular/core';
+import {  Injectable,Output, EventEmitter } from '@angular/core';
 import jwtDecode from 'jwt-decode';
+import { HttpClient } from '@angular/common/http';
+//import { RegisterRequestPayload } from "./pages/register/register-request.payload';
+//import { LocalStorageService } from 'ngx-webstorage';
+
 import { find, Observable, of, throwError } from 'rxjs';
 import { role } from 'src/app/model/role';
 import { Token } from 'src/app/model/token.model';
 import { User } from 'src/app/model/user.model';
+import { RegisterRequestPayload } from 'src/app/pages/register/register-request.payload';
 
 
 
@@ -11,6 +16,8 @@ import { User } from 'src/app/model/user.model';
   providedIn: 'root'
 })
 export class AuthenticateService {
+  
+  
   userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFobWVkIiwicm9sZSI6IlVTRVIiLCJwYXNzd29yZCI6ImFobWVkIiwiY2luIjoiMiIsImlhdCI6MTUxNjIzOTAyMn0.udhnlUiY0IkD6oD022IoN1cjUlV_6EVZ3Ss35N41-kk"
   adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vaGFtZWQiLCJyb2xlIjoiQURNSU4iLCJwYXNzd29yZCI6ImFkbWluIiwiY2luIjoiMSIsImlhdCI6MTUxNjIzOTAyMn0.-6Vh_hCR-QKtiMsNjXe1xPuxBtk8J1x1leiYDfBce8g"
   token!:string;
@@ -18,7 +25,11 @@ export class AuthenticateService {
   currentUser!: any;
   // must get the data from the back because in every page the service is reloaded
 
-  constructor() {
+  constructor(
+    private httpClient: HttpClient,
+    // private localStorage: LocalStorageService
+    ) {
+    
     this.users.push(
       { cin: "1", username: "ahmed", password: "ahmed", role: role.USER },
       { cin: "2", username: "admin", password: "admin", role: role.ADMIN }
@@ -27,6 +38,13 @@ export class AuthenticateService {
     
   }
 
+  signup(registerRequestPayload: RegisterRequestPayload): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/municipality/auth/register', registerRequestPayload, { responseType: 'text' });
+  }
+
+
+  
+  
   public login(cin: string, password: string): Observable<User> {
     let findUser = this.users.find(u => u.cin == cin);
     if (findUser) {
