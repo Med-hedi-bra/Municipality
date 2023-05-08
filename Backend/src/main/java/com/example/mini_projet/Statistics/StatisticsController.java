@@ -29,7 +29,7 @@ public class StatisticsController {
     }
 
     @GetMapping("get/municipality/{id}")
-    public Optional<Statistics> getByMunicipalityId(@PathVariable("id") Long idMun){
+    public Optional<Statistics> getByMunicipalityId(@PathVariable("id") Integer idMun){
         return statisticsService.getStatByIdMun(idMun);
     }
 
@@ -37,7 +37,7 @@ public class StatisticsController {
 
 
     @PostMapping("/add/municipality/{id}")
-    public ResponseEntity<String> addStatistic(@RequestBody Statistics statistics , @PathVariable("id") Long idMun)
+    public ResponseEntity<String> addStatistic(@RequestBody Statistics statistics , @PathVariable("id") Integer idMun)
     {
         boolean test = statisticsService.insertStat(statistics , idMun);
 

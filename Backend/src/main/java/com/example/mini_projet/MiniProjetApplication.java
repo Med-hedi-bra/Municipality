@@ -32,7 +32,7 @@ public class MiniProjetApplication {
 	{
 		return args -> {
 			var municipality = Municipality.builder()
-					.idMun(1L)
+					.idMun(1)
 					.maitre("wassef")
 					.president("wassef")
 					.secritaire("wassef")
@@ -46,6 +46,7 @@ public class MiniProjetApplication {
 					.lastname("admin")
 					.cin("00000000")
 					.role(Role.ADMIN)
+					.codeMun(1)
 					.password(passwordEncoder.encode("1234"))
 					.municipality(municipality)
 					.build();
@@ -58,6 +59,7 @@ public class MiniProjetApplication {
 					.lastname("subadmin")
 					.cin("11111111")
 					.role(Role.SUBADMIN)
+					.codeMun(1)
 					.password(passwordEncoder.encode("1234"))
 					.municipality(municipality)
 					.build();

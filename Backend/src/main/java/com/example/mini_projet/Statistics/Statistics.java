@@ -39,7 +39,7 @@ public class Statistics {
     private Municipality municipality;
 
 
-    public Long getMunicipality() {
+    public Integer getMunicipality() {
         return municipality.getIdMun();
     }
 }

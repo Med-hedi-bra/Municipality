@@ -29,7 +29,7 @@ public class AdminController {
 
 
     @PostMapping("/add/municipality/{id}")
-    public ResponseEntity<String> addStatistic(@RequestBody Statistics s , @PathVariable("id") Long idMun){
+    public ResponseEntity<String> addStatistic(@RequestBody Statistics s , @PathVariable("id") Integer idMun){
 
         boolean test = statisticsService.insertStat(s , idMun);
         if(test){

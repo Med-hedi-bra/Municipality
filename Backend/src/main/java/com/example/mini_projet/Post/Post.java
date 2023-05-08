@@ -48,7 +48,7 @@ public class Post {
     @JsonBackReference
     private Municipality municipality;
 
-    public Long getMunicipality() {
+    public Integer getMunicipality() {
         return municipality.getIdMun();
     }
 

@@ -40,7 +40,7 @@ public class UserService {
         throw new IllegalStateException("User not found");
     }
 
-    public List<User> getUsersByCodeMun(@PathVariable Long codeMun){
+    public List<User> getUsersByCodeMun(@PathVariable Integer codeMun){
         List<User> users = userRepository.findAll();
         List<User> usersByMun =
                 users.stream().filter(usr -> usr.getMunicipality().equals(municipalityRepository.findById(codeMun).get()))
@@ -81,10 +81,10 @@ public class UserService {
 
 
     // a function that set the status of citoyen that will be used by admin
-    public boolean setStatus(String cin , boolean status){
-        Optional<User> user = userRepository.findByCin(cin);
-        if(user.isEmpty()) return false;
-        user.get().setValid(status);
-        return true;
-    }
+//    public boolean setStatus(String cin , boolean status){
+//        Optional<User> user = userRepository.findByCin(cin);
+//        if(user.isEmpty()) return false;
+//        user.get().setValid(status);
+//        return true;
+//    }
 }

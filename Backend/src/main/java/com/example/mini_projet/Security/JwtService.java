@@ -1,14 +1,20 @@
 package com.example.mini_projet.Security;
 
 
+import com.example.mini_projet.Municipality.MunicipalityRepository;
+import com.example.mini_projet.User.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +25,14 @@ import java.util.function.Function;
 import static java.util.Arrays.stream;
 
 @Service
+
 public class JwtService {
 
     private static final String secretKey = "cd+Pr1js+w2qfT2BoCD+tPcYp9LbjpmhSMEJqUob1mcxZ7+Wmik4AYdjX+DlDjmE4yporzQ9tm7v3z/j+QbdYg==§";
+
+
+
+
 
 
 
@@ -77,6 +88,7 @@ public class JwtService {
 
     }
 
+
 //    public Claims extractRole(String token)
 //    {
 //        return extractAllClaims(token).get("authorities",Claims.class);
@@ -89,19 +101,19 @@ public class JwtService {
 
 
     //Generate The JWT Token, We can set Extra Claims(Informations) in a map function
+
     public String generateToken(Map<String, Object> extraClaims,
                                 UserDetails userDetails)
+
     {
 
         var role = roleToClaim(userDetails);
 
-        //var roles = Map.of("role",role);
 
         return Jwts
                 .builder()
                 .setHeaderParam("typ","JWT")
                 .setSubject(userDetails.getUsername())
-                //.claim("Role",userDetails.getAuthorities())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)

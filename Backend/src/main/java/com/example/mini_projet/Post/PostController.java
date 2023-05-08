@@ -29,7 +29,7 @@ public class PostController {
     }
 
     @GetMapping("/get/municipality/{id}")
-    public List<Post> getByIdMunicipality(@PathVariable("id") Long idMun){
+    public List<Post> getByIdMunicipality(@PathVariable("id") Integer idMun){
 
         return postService.getPostsByIdMun(idMun);
 
@@ -38,7 +38,7 @@ public class PostController {
 
 
     @PostMapping("/add/municipality/{id}")
-    public ResponseEntity addNewPost(@PathVariable("id") Long id_mun, @RequestBody Post p){
+    public ResponseEntity addNewPost(@PathVariable("id") Integer id_mun, @RequestBody Post p){
         MessageResponse response;
         boolean test = postService.insert(p , id_mun);
         if(test){
