@@ -1,8 +1,7 @@
 package com.example.mini_projet.User;
 
+import com.example.mini_projet.Dto.Request.UserUpdateRequest;
 import com.example.mini_projet.Municipality.MunicipalityRepository;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,7 +77,23 @@ public class UserService {
 
     }
 
+    @Transactional
+    public boolean update(String cin , UserUpdateRequest userUpdateRequest)  {
+         User user  = userRepository.findByCin(cin).get();
+         if(user==null) return false;
 
+         if(userUpdateRequest.getEmail()!=null) user.setEmail(userUpdateRequest.getEmail());
+         if(userUpdateRequest.getLastname()!=null) user.setLastname(userUpdateRequest.getLastname());
+         if(userUpdateRequest.getFirstname()!=null) user.setFirstname(userUpdateRequest.getFirstname());
+         if(userUpdateRequest.getGender()!=null) user.setGender(userUpdateRequest.getGender());
+         if(userUpdateRequest.getDateOfBirth()!=null) user.setDateOfBirth(userUpdateRequest.getDateOfBirth());
+//         if(userUpdateRequest.getRole()!=null) user.setRole(userUpdateRequest.getRole());
+//         if(userUpdateRequest.getPassword()!=null) user.setPassword(userUpdateRequest.getPassword());
+         return true;
+
+
+
+    }
 
     // a function that set the status of citoyen that will be used by admin
 //    public boolean setStatus(String cin , boolean status){
