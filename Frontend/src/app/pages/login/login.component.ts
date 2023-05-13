@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { role } from 'src/app/model/role';
 import { AuthenticateService } from 'src/app/services/auth/authenticate.service';
+import { LoginRequestPayload } from './login-request.payload';
 
 
 @Component({
@@ -13,47 +14,76 @@ import { AuthenticateService } from 'src/app/services/auth/authenticate.service'
 export class LoginComponent implements OnInit {    
 
   loginForm!: FormGroup;
+  loginRequestPayload!: LoginRequestPayload;
   errorMsg!: string;
   constructor(private fb: FormBuilder, private authService: AuthenticateService, private router: Router ) { }
-  ngOnInit(): void {
-    this.loginForm = this.fb.group({
-      // cin: this.fb.control("", [Validators.required, Validators.minLength(8), Validators.maxLength(11)]),
-      // password: this.fb.control("", [Validators.required])
+  
+  
+  ngOnInit()  {
+    this.loginForm = new FormGroup({
+      cin: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+      
+    });
+    }
+    
+    //                    this.fb.group({
+    //   // cin: this.fb.control("", [Validators.required, Validators.minLength(8), Validators.maxLength(11)]),
+    //   // password: this.fb.control("", [Validators.required])
 
-      cin: this.fb.control("",),
-      password: this.fb.control("",)
+    //   cin: this.fb.control("",),
+    //   password: this.fb.control("",)
    
-    })
-  }
+    // })
+  
   handleLogin() {
-    let cin = this.loginForm.value.cin;
-    let password = this.loginForm.value.password;
-    this.authService.login(cin, password).subscribe(
-      {
-        next: (data) => {
-          this.authService.authenticateUser(data).subscribe({
-            next: (data) => {
-              
-              if (this.authService.userRole() == role.ADMIN) {
-                this.router.navigateByUrl("/admin");
-              }
-              else {
-                this.router.navigateByUrl("/home");
-              }
+    
+    this.loginRequestPayload = {
+      cin: this.loginForm.get('cin')?.value,
+      password: this.loginForm.get('password')?.value,
+    }
+    
+    this.authService.login(this.loginRequestPayload).subscribe({
+        next: data => {
+          // this.authService.authenticateUser(data).subscribe({
+          //   next: (data) => {
+          //     this.router.navigateByUrl("/home");
+          //     console.log(data);
+          //   },
+          //   error: (err) => {
 
-            },
-            error: (err) => {
+          //   }
+          if(data) {
+            this.authService.authenticateUser(data);
+            
+      
+            this.authService.saveLoginResponse(data)
+            this.router.navigateByUrl('/');
+          } else {
+            console.log('Login failed!');
+          }
+        }}  
 
-            }
-          })
-        },
-        error: (err) => {
-          this.errorMsg = err;
-        }
+
+
+
+        );
+  
+  
+          
+          
+        
+        
+        // },
+        
+        
+        //   error: error => {
+        //   console.log(error);
+        // }
+
+      
+  
       }
-    )
-
-  }
 
   getErrorMessage(fieldName: string, err: ValidationErrors): string {
     if (err["required"]) {

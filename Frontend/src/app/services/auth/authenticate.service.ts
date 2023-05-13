@@ -1,14 +1,16 @@
 import {  Injectable,Output, EventEmitter } from '@angular/core';
 import jwtDecode from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
-//import { RegisterRequestPayload } from "./pages/register/register-request.payload';
-//import { LocalStorageService } from 'ngx-webstorage';
 
-import { find, Observable, of, throwError } from 'rxjs';
+
+import { find, map, Observable, of, throwError } from 'rxjs';
 import { role } from 'src/app/model/role';
 import { Token } from 'src/app/model/token.model';
 import { User } from 'src/app/model/user.model';
 import { RegisterRequestPayload } from 'src/app/pages/register/register-request.payload';
+import { LoginRequestPayload } from 'src/app/pages/login/login-request.payload';
+import { LoginResponse } from 'src/app/pages/login/login-response.payload';
+import { LocalStorageService } from 'ngx-webstorage';
 
 
 
@@ -18,25 +20,17 @@ import { RegisterRequestPayload } from 'src/app/pages/register/register-request.
 export class AuthenticateService {
   
   
-  userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFobWVkIiwicm9sZSI6IlVTRVIiLCJwYXNzd29yZCI6ImFobWVkIiwiY2luIjoiMiIsImlhdCI6MTUxNjIzOTAyMn0.udhnlUiY0IkD6oD022IoN1cjUlV_6EVZ3Ss35N41-kk"
-  adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vaGFtZWQiLCJyb2xlIjoiQURNSU4iLCJwYXNzd29yZCI6ImFkbWluIiwiY2luIjoiMSIsImlhdCI6MTUxNjIzOTAyMn0.-6Vh_hCR-QKtiMsNjXe1xPuxBtk8J1x1leiYDfBce8g"
+  // userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFobWVkIiwicm9sZSI6IlVTRVIiLCJwYXNzd29yZCI6ImFobWVkIiwiY2luIjoiMiIsImlhdCI6MTUxNjIzOTAyMn0.udhnlUiY0IkD6oD022IoN1cjUlV_6EVZ3Ss35N41-kk"
+  // adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vaGFtZWQiLCJyb2xlIjoiQURNSU4iLCJwYXNzd29yZCI6ImFkbWluIiwiY2luIjoiMSIsImlhdCI6MTUxNjIzOTAyMn0.-6Vh_hCR-QKtiMsNjXe1xPuxBtk8J1x1leiYDfBce8g"
   token!:string;
-  users: User[] = [];
-  currentUser!: any;
+  // users: User[] = [];
+   currentUser!: User;
+   user!: User;
   // must get the data from the back because in every page the service is reloaded
 
   constructor(
     private httpClient: HttpClient,
-    // private localStorage: LocalStorageService
-    ) {
-    
-    this.users.push(
-      { cin: "1", username: "ahmed", password: "ahmed", role: role.USER },
-      { cin: "2", username: "admin", password: "admin", role: role.ADMIN }
-     
-    );
-    
-  }
+    private localStorage: LocalStorageService) {}
 
   signup(registerRequestPayload: RegisterRequestPayload): Observable<any> {
     return this.httpClient.post('http://localhost:8080/municipality/auth/register', registerRequestPayload, { responseType: 'text' });
@@ -45,52 +39,119 @@ export class AuthenticateService {
 
   
   
-  public login(cin: string, password: string): Observable<User> {
-    let findUser = this.users.find(u => u.cin == cin);
-    if (findUser) {
-      if (findUser.password == password) {
+ login(loginRequestPayload: LoginRequestPayload): Observable<LoginResponse> 
+  {
+   return this.httpClient.post<any>('http://localhost:8080/municipality/auth/login',
+      loginRequestPayload)
+      
+      // .subscribe({
+      //   next: data =>{
+      //     console.log(data.Token);
+      //     console.log(data.user);
+      //     return data
+
+      //   },
+      //   error:err =>throwError(( () => new Error("adfaf");
+      //   ));
         
-        this.token = this.adminToken;
-        return of(findUser);
-      }
-      else return throwError(() => new Error('Bad credentiels'));
-    }
-    else {
-      return throwError(() => new Error('User not found'));
-    }
+      // })
+      
+      // .pipe(
+      //   map((data: LoginResponse) => {
+      //     this.localStorage.store('Token', data.Token);
+      //     this.localStorage.store('user', data.user);
+
+      //     this.token = data.Token;
+      //     this.user = data.user;
+
+      //     return true; // return a value to indicate success
+      //   })
+      // )
+        
+
+  }
+  saveLoginResponse(response: LoginResponse): void {
+    // console.log(response);
+    localStorage.setItem('TOKEN', response.token);
+    console.log(response.token);
+    localStorage.setItem('USER', JSON.stringify(response.user));
+    
   }
 
-  public authenticateUser(user: User): Observable<boolean> {
+  getToken(): string {
+    return this.localStorage.retrieve('token');
+  }
+  getUser(): RegisterRequestPayload {
+    return this.localStorage.retrieve('user');
+  }
+
+  isLoggedIn(): boolean {
+    return this.getToken() !== null;
+  }
+
+  
+  
+  public authenticateUser(loginResp: LoginResponse): Observable<any> {
     
-    this.currentUser = user;
-    localStorage.setItem("TOKEN", this.token);
+    this.currentUser = loginResp.user;
+    this.token =loginResp.token;
+    //return this.currentUser;
+    
     
     return of(true);
   }
 
-  public userRole(): string {
-    if(this.currentUser){
-      return this.currentUser.role;
-    }
-    else {
-      return "";
-    }
+  // public userRole(): string {
+  //   if(this.currentUser){
+  //     return this.currentUser.role;
+  //   }
+  //   else {
+  //     return "";
+  //   }
     
 
-    // return this.authenticatedUser!.role.includes(role);
-  }
+  //   // return this.authenticatedUser!.role.includes(role);
+  // }
+
+  // getJwtToken() {
+  //   return this.localStorage.retrieve('TOKEN');
+  // }
+
+  // isLoggedIn(): boolean {
+  //   return this.getJwtToken() != null;
+  // }
   
   public isAuthenticated():boolean{
-    if(this.currentUser || localStorage.getItem("TOKEN")){
+    if(localStorage.getItem("TOKEN")){
       return true;
     }
     return false ;
   }
+  
   public logout() : Observable<boolean>{
-    this.currentUser = undefined;
+    this.currentUser = {
+      cin: '',
+    codeMun: 0,
+    firstname: '',
+    lastname: '',
+    gender: '',
+    dateOfBirth: new Date("12/12/2000"),
+    password: '',
+    email: '',
+    };
+    localStorage.removeItem("USER")
     localStorage.removeItem("TOKEN");
     return of(true);
   }
+
+  public getMun(){
+    return this.currentUser.codeMun;
+  }
+  public getCin(){
+    return this.currentUser.cin;
+  }
+  
+
 }
 
 

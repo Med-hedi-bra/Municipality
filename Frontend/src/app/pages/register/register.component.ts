@@ -20,19 +20,7 @@ export class RegisterComponent implements OnInit {
   
   constructor(private authService:AuthenticateService,
               private router: Router,
-              ){
-                // this.registerRequestPayload={
-                //   cin: '',
-                //   mun: 0,
-                //   firstname: '',
-                //   lastname: '',
-                //   gender: '',
-                //   dateOfBirth: '' ,
-                //   email:'',
-                //   password: ''
-
-                // };
-              }
+              ){}
   
   
 ngOnInit() {
@@ -63,7 +51,7 @@ handleRegister() {
   
   }
 
-console.log(this.registerRequestPayload);
+  console.log(this.registerRequestPayload);
 
   this.authService.signup(this.registerRequestPayload)
     .subscribe({

@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LocalStorageService } from 'ngx-webstorage';
+
 
 
 import { HomeComponent } from './pages/home/home.component';
@@ -24,6 +26,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { TokenInterceptorService } from './services/tokenInterceptor/token-interceptor.service';
+import { LegalisationComponent } from './pages/home/legalisation/legalisation.component';
 
 @NgModule({
   declarations: [
@@ -40,11 +43,13 @@ import { TokenInterceptorService } from './services/tokenInterceptor/token-inter
     FooterComponent,
     LoginComponent,
     RegisterComponent,
-    AdminComponent
+    AdminComponent,
+    LegalisationComponent
    
    
   ],
   imports: [
+   
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -56,7 +61,8 @@ import { TokenInterceptorService } from './services/tokenInterceptor/token-inter
       provide:HTTP_INTERCEPTORS,
       useClass:TokenInterceptorService,
       multi:true
-    }
+    },
+    LocalStorageService
   ],
   bootstrap: [AppComponent]
 })
