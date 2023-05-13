@@ -64,4 +64,17 @@ public class UserController {
 
 
     }
+
+
+    // a function that updates the status of user(enabled/disabled) : used by ADMIN
+    // please remove the comments to use this feature
+
+    //    @PutMapping("/updateStatus/{cin}")
+//    public ResponseEntity update(@PathVariable("cin") String cin , @RequestParam boolean status){
+//        boolean test = userService.updateStatus(cin , status);
+//        if(test) return ResponseEntity.status(203).body(new ResponseMessage("Update user with success"));
+//        else return ResponseEntity.status(451).body(new ResponseMessage("Failure to Update user"));
+//
+//
+//    }
 }
