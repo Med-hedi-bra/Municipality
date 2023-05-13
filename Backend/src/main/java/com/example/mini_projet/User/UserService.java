@@ -87,6 +87,8 @@ public class UserService {
          if(userUpdateRequest.getFirstname()!=null) user.setFirstname(userUpdateRequest.getFirstname());
          if(userUpdateRequest.getGender()!=null) user.setGender(userUpdateRequest.getGender());
          if(userUpdateRequest.getDateOfBirth()!=null) user.setDateOfBirth(userUpdateRequest.getDateOfBirth());
+
+
 //         if(userUpdateRequest.getRole()!=null) user.setRole(userUpdateRequest.getRole());
 //         if(userUpdateRequest.getPassword()!=null) user.setPassword(userUpdateRequest.getPassword());
          return true;
@@ -95,11 +97,12 @@ public class UserService {
 
     }
 
-    // a function that set the status of citoyen that will be used by admin
-//    public boolean setStatus(String cin , boolean status){
-//        Optional<User> user = userRepository.findByCin(cin);
-//        if(user.isEmpty()) return false;
-//        user.get().setValid(status);
+    // a function that updates the status of user(enabled/disabled) : used by ADMIN
+    // please remove the comments to use this feature
+
+//    public boolean updateStatus(String cin, boolean status ){
+//        User user = userRepository.findByCin(cin).get();
+//        user.setStatus(status); ;
 //        return true;
 //    }
 }

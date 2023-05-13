@@ -44,6 +44,7 @@ public class Municipality {
     @JsonManagedReference
     @Getter
     @Setter
+
     private Set<User> users = new HashSet<User>();
 
     public Set<User> getUsers() {

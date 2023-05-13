@@ -47,6 +47,7 @@ public class MiniProjetApplication {
 					.cin("00000000")
 					.role(Role.ADMIN)
 					.codeMun(1)
+					//.status(true)
 					.password(passwordEncoder.encode("1234"))
 					.municipality(municipality)
 					.build();
@@ -62,6 +63,7 @@ public class MiniProjetApplication {
 					.codeMun(1)
 					.password(passwordEncoder.encode("1234"))
 					.municipality(municipality)
+					//.status(true)
 					.build();
 			userRepository.save(subadmin);
 			System.out.println("subadmin created");
