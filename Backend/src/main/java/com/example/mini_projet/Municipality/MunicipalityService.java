@@ -1,5 +1,6 @@
 package com.example.mini_projet.Municipality;
 
+import com.example.mini_projet.Dto.Request.MunicipalityRequest;
 import com.example.mini_projet.User.User;
 import com.example.mini_projet.User.UserRepository;
 import jakarta.transaction.Transactional;
@@ -62,7 +63,15 @@ public class MunicipalityService {
         return municipalityRepository.save(municipality);
 
     }
-
+    @Transactional
+    public boolean update(Integer idMun,MunicipalityRequest newMun){
+        Municipality mun = getById(idMun).get();
+        if(mun ==null) return false;
+        if(newMun.getMaitre()!=null) mun.setMaitre(newMun.getMaitre());
+        if(newMun.getPresident()!=null) mun.setPresident(newMun.getPresident());
+        if(newMun.getSecritaire()!=null) mun.setSecritaire(newMun.getSecritaire());
+        return true;
+    }
 
 
 
