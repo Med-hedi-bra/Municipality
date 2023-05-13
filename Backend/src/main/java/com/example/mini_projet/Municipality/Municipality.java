@@ -45,7 +45,6 @@ public class Municipality {
     @Getter
     @Setter
 
-
     private Set<User> users = new HashSet<User>();
 
     public Set<User> getUsers() {
