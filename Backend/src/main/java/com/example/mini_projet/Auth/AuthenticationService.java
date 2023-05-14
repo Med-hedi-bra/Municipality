@@ -51,6 +51,11 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .municipality(mun)
+                // a registered user is disabled by default,
+                // the ADMIN should enable him to let him login.
+                // remove the comment to use this feature!
+
+                //.status(false)
                 .build();
 
 

@@ -13,55 +13,57 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   
-  regsiterRequestPayload!: RegisterRequestPayload;
-  registerForm !: FormGroup;
+  registerRequestPayload!: RegisterRequestPayload;
+  registerForm!: FormGroup;
 
   
   
   constructor(private authService:AuthenticateService,
-              private router: Router){
-                this.regsiterRequestPayload={
-                  cin: '',
-                  firstname: '',
-                  lastname: '',
-                  gender: '',
-                  dateOfBirth: '',
-                  email:'',
-                  password: ''
-
-                }
-              }
+              private router: Router,
+              ){}
   
   
 ngOnInit() {
+  
   this.registerForm = new FormGroup({
     cin: new FormControl('', Validators.required),
+    codeMun: new FormControl('', Validators.required),
     firstname: new FormControl('', Validators.required),
     lastname: new FormControl('', Validators.required),
     gender: new FormControl('', Validators.required),
     dateOfBirth: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
   });
 }
 
-register() {
-  this.registerRequestPayload.cin = this.registerForm.get('').value,
-  this.registerRequestPayload.firstname = this.registerForm.get('username').value,
-  this.registerRequestPayload.lastname = this.registerForm.get('username').value,
-  this.registerRequestPayload.gender = this.registerForm.get('username').value,
-  this.registerRequestPayload.dateOfBirth = this.registerForm.get('username').value,
-  this.registerRequestPayload.email = this.registerForm.get('username').value,
-  this.registerRequestPayload.password = this.registerForm.get('password').value
+handleRegister() {
+  
+  this .registerRequestPayload = {
+    cin: this.registerForm.get('cin')?.value,
+    codeMun: this.registerForm.get('codeMun')?.value,
+    firstname: this.registerForm.get('firstname')?.value,
+    lastname: this.registerForm.get('lastname')?.value,
+    gender: this.registerForm.get('gender')?.value,
+    dateOfBirth: this.registerForm.get('dateOfBirth')?.value,
+    password: this.registerForm.get('password')?.value,
+    email: this.registerForm.get('email')?.value
+  
+  }
 
-  this.authService.register(this.registerRequestPayload)
-    .subscribe(data => {
-      this.router.navigate(['/login'],
-        { queryParams: { registered: 'true' } });
-    }, error => {
-      console.log(error);
-      this.toastr.error('Registration Failed! Please try again');
+  console.log(this.registerRequestPayload);
+
+  this.authService.signup(this.registerRequestPayload)
+    .subscribe({
+     next: data => {
+        this.router.navigate(['/login'],
+          { queryParams: { registered: 'true' } });
+      }, 
+      error: error => {
+        console.log(error);
+        //this.toastr.error('Registration Failed! Please try again');
+      }
     });
-}
+ }
 
 }

@@ -5,6 +5,7 @@ import com.example.mini_projet.ContentOfBirth.ContentOfBirth;
 import com.example.mini_projet.Auth.Token;
 import com.example.mini_projet.Municipality.Municipality;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -67,6 +68,15 @@ public class User implements UserDetails {
     private com.example.mini_projet.Enums.Role role;
 
 
+    // this variable used to enable or disable a user,
+    //its value is passed to isEnabled function of the userdetails interface
+    // Consider that a disabled user cannot login !
+    // please remove the comment to use this feature
+
+    @JsonIgnore
+    private boolean status;
+
+
 
 
 
@@ -75,6 +85,7 @@ public class User implements UserDetails {
     @JsonBackReference
     @Getter
     @Setter
+
     private Municipality municipality;
 
     public Integer getMunicipality() {
@@ -109,17 +120,20 @@ public class User implements UserDetails {
 
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return role.getAuthorities();
 
     }
 
     @Override
+
     public String getPassword() {
         return password;
     }
 
     @Override
+    @JsonIgnore
     public String getUsername() {
         return cin;
     }
@@ -135,6 +149,7 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
@@ -142,5 +157,7 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+        //return status;
+        //please remove the comment to use this feature
     }
 }

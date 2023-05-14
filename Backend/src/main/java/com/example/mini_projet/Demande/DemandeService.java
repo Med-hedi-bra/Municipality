@@ -76,7 +76,11 @@ public class DemandeService {
             if(demandeRequest.getState() != null ){
                 demande.setState(demandeRequest.getState());
             }
+<<<<<<< HEAD
             if(demandeRequest.getTitle() !=null) demande.setTitle(demandeRequest.getTitle());
+=======
+            if(demandeRequest.getTitle()!=null) demande.setTitle(demandeRequest.getTitle());
+>>>>>>> 918a0f0240494f209da519d2462b4543783c45ef
             return true;
         }
         catch (Exception e){

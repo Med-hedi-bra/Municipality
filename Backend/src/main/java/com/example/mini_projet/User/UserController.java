@@ -1,7 +1,7 @@
 package com.example.mini_projet.User;
 
-import com.example.mini_projet.User.UserService;
-import com.example.mini_projet.User.User;
+import com.example.mini_projet.Dto.Request.UserUpdateRequest;
+import com.example.mini_projet.File.message.ResponseMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/municipality/user")
@@ -39,7 +38,7 @@ public class UserController {
     }
 
 
-    @PutMapping("/update/{cin}")
+    @PutMapping("/update1/{cin}")
         public ResponseEntity<String> updateUser(
             @PathVariable(name = "cin") String cin,
             @RequestParam(name = "firstname",required = false) String firstname,
@@ -56,4 +55,26 @@ public class UserController {
         return  ResponseEntity.status(200).body("User update successfully");
     }
 
+
+    @PutMapping("/update/{cin}")
+    public ResponseEntity update(@PathVariable("cin") String cin , @RequestBody UserUpdateRequest userUpdateRequest){
+            boolean test = userService.update(cin , userUpdateRequest);
+            if(test) return ResponseEntity.status(203).body(new ResponseMessage("Update user with success"));
+            else return ResponseEntity.status(451).body(new ResponseMessage("Failure to Update user"));
+
+
+    }
+
+
+    // a function that updates the status of user(enabled/disabled) : used by ADMIN
+    // please remove the comments to use this feature
+
+    //    @PutMapping("/updateStatus/{cin}")
+//    public ResponseEntity update(@PathVariable("cin") String cin , @RequestParam boolean status){
+//        boolean test = userService.updateStatus(cin , status);
+//        if(test) return ResponseEntity.status(203).body(new ResponseMessage("Update user with success"));
+//        else return ResponseEntity.status(451).body(new ResponseMessage("Failure to Update user"));
+//
+//
+//    }
 }
