@@ -28,6 +28,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { TokenInterceptorService } from './services/tokenInterceptor/token-interceptor.service';
 import { LegalisationComponent } from './pages/home/legalisation/legalisation.component';
 import { CopieComponent } from './pages/home/copie/copie.component';
+import { NewCopieComponent } from './pages/home/copie/new-copie/new-copie.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { CopieComponent } from './pages/home/copie/copie.component';
     RegisterComponent,
     AdminComponent,
     LegalisationComponent,
-    CopieComponent
+    CopieComponent,
+    NewCopieComponent
    
    
   ],

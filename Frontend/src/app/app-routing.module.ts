@@ -8,6 +8,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { AuthenticationGuard, IsLogedIn } from './services/guards/authentication.guard';
 import { LegalisationComponent } from './pages/home/legalisation/legalisation.component';
 import { CopieComponent } from './pages/home/copie/copie.component';
+import { NewCopieComponent } from './pages/home/copie/new-copie/new-copie.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,9 @@ const routes: Routes = [
   // canActivate: [IsLogedIn] 
  },
  { path: "copie", component: CopieComponent, 
+ // canActivate: [IsLogedIn]
+},
+{ path: "newcopie", component: NewCopieComponent, 
  // canActivate: [IsLogedIn]
 },
 

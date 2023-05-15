@@ -22,8 +22,34 @@
                     <div class="default-section-title">
                         <h3>Liste des vos demande de copie Conforme</h3>
                     </div>
-                    
-                   
+                    <br><br><br>
+                    <button class="default-button" routerLink="/newcopie">New</button>
+                    <br><br><br>
+                    <div>
+                        <table class="table">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">State</th>
+                                <th scope="col">File</th>
+                                <th scope ="col">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let demand of listDemande">
+                                    <th scope="row">1</th>
+                                    <td>{{demand.title}}</td>
+                                    <td>{{demand.state}}</td>
+                                    <td>{{demand.file}}</td>
+                                    <td><button class="btn btn-danger" (click)="deleteOne(demand)">Delete</button></td>
+                                  </tr>
+                              
+                            </tbody>
+                          </table>
+                          
+                        
+                    </div>                
                 </div>
             </div>
         </div>
