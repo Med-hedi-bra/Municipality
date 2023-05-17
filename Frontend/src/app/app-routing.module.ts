@@ -9,6 +9,8 @@ import { AuthenticationGuard, IsLogedIn } from './services/guards/authentication
 import { LegalisationComponent } from './pages/home/legalisation/legalisation.component';
 import { CopieComponent } from './pages/home/copie/copie.component';
 import { NewCopieComponent } from './pages/home/copie/new-copie/new-copie.component';
+import { NewLegalistaionComponent } from './pages/home/legalisation/new-legalistaion/new-legalistaion.component';
+import { ShowComponent } from './pages/home/legalisation/show/show.component';
 
 
 const routes: Routes = [
@@ -26,7 +28,12 @@ const routes: Routes = [
 { path: "newcopie", component: NewCopieComponent, 
  // canActivate: [IsLogedIn]
 },
-
+{ path: "show", component: ShowComponent, 
+ // canActivate: [IsLogedIn]
+},
+{ path: "newlegalisation", component: NewLegalistaionComponent, 
+ // canActivate: [IsLogedIn]
+},
 
   { path: "**", redirectTo: "/home", pathMatch: "full" }
 

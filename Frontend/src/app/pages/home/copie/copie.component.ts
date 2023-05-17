@@ -23,12 +23,14 @@ export class CopieComponent implements OnInit {
     this.dataService.getAllDemand().subscribe({
       next: res => {
         res.forEach(element => {
-          this.listDemande.push({
+          if(element.type == 'COPIECONFORME'){
+            this.listDemande.push({
             idDemande: element.idDemande,
             title:element.title,
             type: element.type,
             state: element.state,
           })
+          }
         }
         );
         console.log("demand data fetched");

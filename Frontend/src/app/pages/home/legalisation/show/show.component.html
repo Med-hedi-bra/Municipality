@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+
+<div class="login pt-70 pb-100">
+    <div class="container">
+        <div class="row">
+            
+            <section class="uni-banner">
+                <div class="container">
+                    <div class="uni-banner-text-area">
+                        <h1>Demande</h1>
+                        <ul>
+                            <li><a routerLink="home">Acceuil</a></li>
+                            <li>Demande</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="col-lg-6 col-md-12 offset-md-3 col-sm-12  col-12 " >
+                <div class="log-in-card">
+                    
+                    <div class="default-section-title">
+                        <h3>Votre Demande</h3>
+                    </div>
+                    
+                    <div>
+                       
+                        <pdf-viewer [src]="pdfUrl" 
+                        [show-all]="true"
+                        [render-text]="true"
+                                  [original-size]="false"
+                        style="width: 500px; height: 500px"
+                    >
+                    
+                    </pdf-viewer>
+                        
+                    </div>
+                    <br><br>  
+                    <button class="default-button" (click)="downloadFile()">Download</button>              
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</div>
+<app-footer></app-footer>

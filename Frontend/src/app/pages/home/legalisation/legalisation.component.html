@@ -7,10 +7,10 @@
             <section class="uni-banner">
                 <div class="container">
                     <div class="uni-banner-text-area">
-                        <h1>Legalisation</h1>
+                        <h1>Légalisation</h1>
                         <ul>
                             <li><a routerLink="home">Acceuil</a></li>
-                            <li>Legalisation</li>
+                            <li>Légalisation</li>
                         </ul>
                     </div>
                 </div>
@@ -20,52 +20,41 @@
                 <div class="log-in-card">
                     
                     <div class="default-section-title">
-                        <h3>Create An Account</h3>
+                        <h3>Liste des vos demande de Légalisation</h3>
                     </div>
-                    
-                    <div class="login-form">
-                        <form [formGroup]="demandeForm" >
-                            <!-- [formGroup]="registerForm" -->
-                            <!--(ngSubmit)="handleRegister()" -->
+                    <br><br><br>
+                    <button class="default-button" routerLink="/newlegalisation">New</button>
+                    <br><br><br>
+                    <div>
+                        <table class="table">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">State</th>
+                                <th scope="col">File</th>
+                                <th scope ="col">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let demand of listDemande">
+                                    <th scope="row">1</th>
+                                    <td>{{demand.title}}</td>
+                                    <td>{{demand.state}}</td>
+                                    <td>{{demand.file}}</td>
+                                    <td>
+                                        
+                                        <button class="btn btn-danger" (click)="deleteOne(demand)">Delete</button>
+                                        <button style="margin-left: 5px;" *ngIf='demand.state == "ACCEPTED"' class="btn btn-info" routerLink="/show">Show</button>
+                                    </td>
+                                    
+                                  </tr>
+                              
+                            </tbody>
+                          </table>
+                          
                         
-                           
-                            <div class="mb-3"  >
-                                <input 
-                                type="text" 
-                                [formControlName]="'cin'" 
-                                class="form-control" 
-                                placeholder="CIN" 
-                                />
-                            </div>
-
-                            <div class="mb-3">
-                                <input
-                                type="text" 
-                                [formControlName]="'description'" 
-                                class="form-control" 
-                                placeholder="description" 
-                                >
-                            
-                            </div>
-
-                            <div class="mb-3" >
-                                <input 
-                                type="file" 
-                                [formControlName]="'file'" 
-                                class="form-control" 
-                                placeholder="Municipality" 
-                                />
-                            </div>
-                            
-                            
-                           
-                            <p>
-                                The file should be at most eight 200 Mb.
-                            <button type="submit" class="default-button">
-                                Submit <i class="fas fa-angle-right"></i>
-                            </button>
-                        </form>
-                    </div>
+                    </div>                
                 </div>
             </div>
         </div>

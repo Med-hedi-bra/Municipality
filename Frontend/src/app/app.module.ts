@@ -29,6 +29,9 @@ import { TokenInterceptorService } from './services/tokenInterceptor/token-inter
 import { LegalisationComponent } from './pages/home/legalisation/legalisation.component';
 import { CopieComponent } from './pages/home/copie/copie.component';
 import { NewCopieComponent } from './pages/home/copie/new-copie/new-copie.component';
+import { NewLegalistaionComponent } from './pages/home/legalisation/new-legalistaion/new-legalistaion.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ShowComponent } from './pages/home/legalisation/show/show.component';
 
 @NgModule({
   declarations: [
@@ -48,12 +51,14 @@ import { NewCopieComponent } from './pages/home/copie/new-copie/new-copie.compon
     AdminComponent,
     LegalisationComponent,
     CopieComponent,
-    NewCopieComponent
+    NewCopieComponent,
+    NewLegalistaionComponent,
+    ShowComponent
    
    
   ],
   imports: [
-   
+   PdfViewerModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
