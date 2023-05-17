@@ -1,0 +1,75 @@
+<app-navbar></app-navbar>
+
+<div class="login pt-70 pb-100">
+    <div class="container">
+        <div class="row">
+           
+            <section class="uni-banner">
+                <div class="container">
+                    
+                    <div class="uni-banner-text-area">
+                        <h1>Nouvelle demande de Copie Conforme</h1>
+                        <ul>
+                            <li><a routerLink="home">Acceuil</a></li>
+                            <li>Copie Conforme</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="col-lg-6 col-md-12 offset-md-3 col-sm-12  col-12 " >
+                <div class="log-in-card">
+                    <div *ngIf="test" class="alert alert-success" role="alert">
+                        Demande ajouté avec success
+                      </div>
+                    <div class="default-section-title">
+                        <h3>Ajouter une demande de Copie Conforme</h3>
+                    </div>
+                    
+                    <div class="login-form">
+                        <form [formGroup]="newDemandForm" (ngSubmit)="submit()">
+                            <!-- [formGroup]="registerForm" -->
+                            <!--(ngSubmit)="handleRegister()" -->
+                        
+                           
+                            <div class="mb-3"  >
+                                <input 
+                                type="text" 
+                                [formControlName]="'title'" 
+                                class="form-control" 
+                                placeholder="Titre" 
+                                />
+                            </div>
+
+                            <div class="mb-3">
+                                <input
+                                type="text" 
+                                [formControlName]="'description'" 
+                                class="form-control" 
+                                placeholder="description" 
+                                >
+                            
+                            </div>
+
+                            <div class="mb-3" >
+                                <input 
+                                type="file" 
+                                [formControlName]="'file'" 
+                                class="form-control" 
+                                placeholder="Municipality" 
+                                />
+                            </div>
+                            
+                            <p>
+                                The file should be at most eight 200 Mb.
+                            <button type="submit" class="default-button">
+                                Submit <i class="fas fa-angle-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
