@@ -27,6 +27,11 @@ import { RegisterComponent } from './pages/register/register.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { TokenInterceptorService } from './services/tokenInterceptor/token-interceptor.service';
 import { LegalisationComponent } from './pages/home/legalisation/legalisation.component';
+import { CopieComponent } from './pages/home/copie/copie.component';
+import { NewCopieComponent } from './pages/home/copie/new-copie/new-copie.component';
+import { NewLegalistaionComponent } from './pages/home/legalisation/new-legalistaion/new-legalistaion.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ShowComponent } from './pages/home/legalisation/show/show.component';
 
 @NgModule({
   declarations: [
@@ -44,12 +49,16 @@ import { LegalisationComponent } from './pages/home/legalisation/legalisation.co
     LoginComponent,
     RegisterComponent,
     AdminComponent,
-    LegalisationComponent
+    LegalisationComponent,
+    CopieComponent,
+    NewCopieComponent,
+    NewLegalistaionComponent,
+    ShowComponent
    
    
   ],
   imports: [
-   
+   PdfViewerModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
